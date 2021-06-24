@@ -63,7 +63,7 @@ namespace EVLlib.Mathamatics
         /// <param name="minimumValue">Minimum number.</param>
         /// <param name="maximumValue">Maximium number.</param>
         /// <returns>Random number.</returns>
-        public int RNGNumberBetween(int minimumValue, int maximumValue)
+        public int RandomNumber(int minimumValue, int maximumValue)
         {
             byte[] randomNumber = new byte[1];
 
