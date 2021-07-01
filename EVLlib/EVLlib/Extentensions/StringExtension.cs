@@ -38,6 +38,27 @@ namespace EVLlib.Extentensions
             }
             return value.Substring(adjustedPosA, posB - adjustedPosA);
         }
+
+        /// <summary>
+        /// Get string value after [first] a.
+        /// </summary>
+        /// <remarks>
+        /// The Before method accepts 1 string (a) 
+        /// and locates it in the source string.
+        /// </remarks>
+        /// <param name="a">First String.</param>
+        /// <returns>
+        /// The substring before the first string.
+        /// </returns>
+        public static string Before(this string value, string a)
+        {
+            int posA = value.IndexOf(a);
+            if (posA == -1)
+            {
+                return "";
+            }
+            return value.Substring(0, posA);
+        }
         #endregion
     }
 }
