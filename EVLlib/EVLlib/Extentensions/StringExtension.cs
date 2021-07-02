@@ -59,6 +59,32 @@ namespace EVLlib.Extentensions
             }
             return value.Substring(0, posA);
         }
+
+        /// <summary>
+        /// Get string value after [last] a.
+        /// </summary>
+        /// <remarks>
+        /// The After method accepts 1 string (a) 
+        /// and locates it in the source string.
+        /// </remarks>
+        /// <param name="a">Last String.</param>
+        /// <returns>
+        /// The substring After the Last string.
+        /// </returns>
+        public static string After(this string value, string a)
+        {
+            int posA = value.LastIndexOf(a);
+            if (posA == -1)
+            {
+                return "";
+            }
+            int adjustedPosA = posA + a.Length;
+            if (adjustedPosA >= value.Length)
+            {
+                return "";
+            }
+            return value.Substring(adjustedPosA);
+        }
         #endregion
     }
 }
