@@ -85,6 +85,26 @@ namespace EVLlib.Extentensions
             }
             return value.Substring(adjustedPosA);
         }
+
+        /// <summary>
+        /// Get string value after removing [excludedWords].
+        /// </summary>
+        /// <remarks>
+        /// The RemoveWords method accepts 1 array (excludedWords) and
+        /// iterates through it remove each match in the source string.
+        /// </remarks>
+        /// <param name="excludedWords">Array of strings.</param>
+        /// <returns>
+        /// The substring with the excluded words removed.
+        /// </returns>
+        public static string RemoveWords(this string value, string[] excludedWords)
+        {
+            foreach (string word in excludedWords)
+            {
+                value = value.Replace(word, string.Empty);
+            }
+            return value.Trim().ReduceWhitespace();
+        }
         #endregion
     }
 }
