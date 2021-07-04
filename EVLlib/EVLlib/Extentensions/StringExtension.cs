@@ -105,6 +105,39 @@ namespace EVLlib.Extentensions
             }
             return value.Trim().ReduceWhitespace();
         }
+
+        /// <summary>
+        /// Get string value after removing swapping letters.
+        /// </summary>
+        /// <remarks>
+        /// The ReplaceLetters method accepts 2 Chars (lettersToFind)
+        /// and (lettersToReplace), then iterates through the source string
+        /// replacing each match.
+        /// </remarks>
+        /// <param name="letterToFind">Char to find in source string.</param>
+        /// <param name="letterToReplace">Char to replace.</param>
+        /// <returns>
+        /// The substring with letters replaced upon match.
+        /// </returns>
+        public static string ReplaceLetters(this string wordToSearch, char letterToFind, char letterToReplace)
+        {
+            StringBuilder word = new StringBuilder(wordToSearch);
+
+            int index = 0;
+
+            foreach (char letter in wordToSearch)
+            {
+                if (letter.Equals(letterToFind))
+                {
+                    word.Remove(index, 1);
+                    word.Insert(index, letterToReplace);
+                }
+
+                index++;
+            }
+
+            return word.ToString();
+        }
         #endregion
     }
 }
