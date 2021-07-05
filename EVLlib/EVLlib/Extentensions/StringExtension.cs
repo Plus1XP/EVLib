@@ -138,6 +138,41 @@ namespace EVLlib.Extentensions
 
             return word.ToString();
         }
+
+        /// <summary>
+        /// Get string value after removing any extra white spaces.
+        /// </summary>
+        /// <remarks>
+        /// This method REDUCES not REMOVES white spaces.
+        /// It will also leave the first white space and remove any extra.
+        /// </remarks>
+        /// <param name="value">String to inspect for any extra white spaces.</param>
+        /// <returns>A Single spaced string.</returns>
+        public static string ReduceWhitespace(this string value)
+        {
+            var newString = new StringBuilder();
+            bool previousIsWhitespace = false;
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (Char.IsWhiteSpace(value[i]))
+                {
+                    if (previousIsWhitespace)
+                    {
+                        continue;
+                    }
+
+                    previousIsWhitespace = true;
+                }
+                else
+                {
+                    previousIsWhitespace = false;
+                }
+
+                newString.Append(value[i]);
+            }
+
+            return newString.ToString();
+        }
         #endregion
     }
 }
