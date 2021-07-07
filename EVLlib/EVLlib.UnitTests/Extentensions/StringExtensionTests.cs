@@ -25,5 +25,15 @@ namespace EVLlib.Extentensions.Tests
 
             Assert.AreEqual(expected, results);
         }
+
+        [TestMethod()]
+        public void BeforeTest()
+        {
+            string expected = "Hello! i am a simple string";
+
+            string results = normalTestString.Before(" for");
+
+            Assert.AreEqual(expected, results);
+        }
     }
 }
