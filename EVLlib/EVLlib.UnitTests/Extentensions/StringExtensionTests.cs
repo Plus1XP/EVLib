@@ -35,5 +35,15 @@ namespace EVLlib.Extentensions.Tests
 
             Assert.AreEqual(expected, results);
         }
+
+        [TestMethod()]
+        public void AfterTest()
+        {
+            string expected = "Please be gentle!";
+
+            string results = normalTestString.After("purposes. ");
+
+            Assert.AreEqual(expected, results);
+        }
     }
 }
