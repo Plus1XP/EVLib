@@ -45,5 +45,15 @@ namespace EVLlib.Extentensions.Tests
 
             Assert.AreEqual(expected, results);
         }
+
+        [TestMethod()]
+        public void RemoveWordsTest()
+        {
+            string expected = "! i am a string for testing purposes. be gentle!";
+
+            string results = normalTestString.RemoveWords(new string[] { "Hello", "simple", "Please" });
+
+            Assert.AreEqual(expected, results);
+        }
     }
 }
