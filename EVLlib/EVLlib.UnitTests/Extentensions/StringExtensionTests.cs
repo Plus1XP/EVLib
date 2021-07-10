@@ -55,5 +55,19 @@ namespace EVLlib.Extentensions.Tests
 
             Assert.AreEqual(expected, results);
         }
+
+        [TestMethod()]
+        public void ReplaceLettersTest()
+        {
+            char find = Convert.ToChar("e");
+            char replace = Convert.ToChar("3");
+
+            string expected = "H3llo! i am a simpl3 string for t3sting purpos3s. " +
+                                "Pl3as3 b3 g3ntl3!";
+
+            string results = normalTestString.ReplaceLetters(find, replace);
+
+            Assert.AreEqual(expected, results);
+        }
     }
 }
