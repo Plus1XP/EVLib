@@ -69,5 +69,16 @@ namespace EVLlib.Extentensions.Tests
 
             Assert.AreEqual(expected, results);
         }
+
+        [TestMethod()]
+        public void ReduceWhiteSpaceTest()
+        {
+            string expected = " Hello! i am a simple string with far too many " +
+                "spaces... Please Help! ";
+
+            string results = multipleSpacedTestString.ReduceWhitespace();
+
+            Assert.AreEqual(expected, results);
+        }
     }
 }
