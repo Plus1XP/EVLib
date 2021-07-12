@@ -103,7 +103,7 @@ namespace EVLlib.Extentensions
             {
                 value = value.Replace(word, string.Empty);
             }
-            return value.Trim().ReduceWhitespace();
+            return value.Trim().ReduceWhitespaces();
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace EVLlib.Extentensions
         /// </remarks>
         /// <param name="value">String to inspect for any extra white spaces.</param>
         /// <returns>A Single spaced string.</returns>
-        public static string ReduceWhitespace(this string value)
+        public static string ReduceWhitespaces(this string value)
         {
             var newString = new StringBuilder();
             bool previousIsWhitespace = false;
