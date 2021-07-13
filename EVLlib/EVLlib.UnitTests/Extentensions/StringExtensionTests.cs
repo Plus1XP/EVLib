@@ -71,12 +71,12 @@ namespace EVLlib.Extentensions.Tests
         }
 
         [TestMethod()]
-        public void ReduceWhiteSpaceTest()
+        public void ReduceWhiteSpacesTest()
         {
             string expected = " Hello! i am a simple string with far too many " +
                 "spaces... Please Help! ";
 
-            string results = multipleSpacedTestString.ReduceWhitespace();
+            string results = multipleSpacedTestString.ReduceWhitespaces();
 
             Assert.AreEqual(expected, results);
         }
