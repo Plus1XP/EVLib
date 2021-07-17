@@ -8,6 +8,16 @@ namespace EVLlib.ConsoleTools
     class TextUI
     {
         /// <summary>
+        /// Align content to center for console. Can be used with decoration if used inside menu or header
+        /// </summary>
+        /// <param name="text">Content to center</param>
+        /// <returns>Center aligned text</returns>
+        public void PrintToCenterScreen(string text)
+        {
+            Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + (text.Length / 2)) + "}", text));
+        }
+
+        /// <summary>
         /// Gets the newline string.
         /// </summary>
         /// <remarks>
