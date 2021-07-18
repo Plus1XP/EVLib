@@ -8,6 +8,15 @@ namespace EVLlib.ConsoleTools
     class TextUI
     {
         /// <summary>
+        /// Prints a string to the console.
+        /// </summary>
+        /// <param name="text">String value to be printed</param>
+        public void Print(string text)
+        {
+            Console.WriteLine(text);
+        }
+
+        /// <summary>
         /// Align content to center for console. Can be used with decoration if used inside menu or header
         /// </summary>
         /// <param name="text">Content to center</param>
