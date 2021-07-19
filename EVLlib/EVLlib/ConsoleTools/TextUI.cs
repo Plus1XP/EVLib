@@ -8,6 +8,15 @@ namespace EVLlib.ConsoleTools
     class TextUI
     {
         /// <summary>
+        /// Sets the console title bar text.
+        /// </summary>
+        /// <param name="text">Text to be displayed in the console title bar.</param>
+        public void SetConsoleTitle(string text)
+        {
+            Console.Title = text;
+        }
+
+        /// <summary>
         /// Prints a string to the console.
         /// </summary>
         /// <param name="text">String value to be printed</param>
