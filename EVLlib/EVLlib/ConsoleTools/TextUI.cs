@@ -8,6 +8,14 @@ namespace EVLlib.ConsoleTools
     class TextUI
     {
         /// <summary>
+        /// Resets the console colour to default.
+        /// </summary>
+        public void ResetTextColour()
+        {
+            Console.ResetColor();
+        }
+
+        /// <summary>
         /// Sets the console title bar text.
         /// </summary>
         /// <param name="text">Text to be displayed in the console title bar.</param>
