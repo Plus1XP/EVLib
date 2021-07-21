@@ -8,6 +8,15 @@ namespace EVLlib.ConsoleTools
     class TextUI
     {
         /// <summary>
+        /// Sets the foreground colour of the console.
+        /// </summary>
+        /// <param name="colour">The enum of a specified colour.</param>
+        public void ChangeTextColour(ConsoleColor colour)
+        {
+            Console.ForegroundColor = colour;
+        }
+
+        /// <summary>
         /// Resets the console colour to default.
         /// </summary>
         public void ResetTextColour()
