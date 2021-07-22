@@ -8,6 +8,14 @@ namespace EVLlib.ConsoleTools
     class TextUI
     {
         /// <summary>
+        /// Executes the Console.ReadKey Method.
+        /// </summary>
+        public void AwaitResponse()
+        {
+            Console.ReadKey();
+        }
+
+        /// <summary>
         /// Sets the foreground colour of the console.
         /// </summary>
         /// <param name="colour">The enum of a specified colour.</param>
