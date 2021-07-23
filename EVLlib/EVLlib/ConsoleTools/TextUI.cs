@@ -8,6 +8,15 @@ namespace EVLlib.ConsoleTools
     class TextUI
     {
         /// <summary>
+        /// Executes Console.ReadLine Method.
+        /// </summary>
+        /// <returns>String of characters from input stream.</returns>
+        public string GetResponse()
+        {
+            return Console.ReadLine();
+        }
+
+        /// <summary>
         /// Executes the Console.ReadKey Method.
         /// </summary>
         public void AwaitResponse()
