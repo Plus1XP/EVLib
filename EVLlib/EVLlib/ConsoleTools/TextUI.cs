@@ -8,6 +8,28 @@ namespace EVLlib.ConsoleTools
     class TextUI
     {
         /// <summary>
+        /// Reads a string (letters) from the console using Console.ReadLine.
+        /// </summary>
+        /// <remarks>
+        /// Method will loop until a valid string is entered.
+        /// (Unacceptable values includes non-letters and whitespaces).
+        /// </remarks>
+        /// <param name="DisplayText">String to be displayed before user input.</param>
+        /// <returns>A String in lowercase.</returns>
+        public string GetTextResponse(string DisplayText)
+        {
+            string text;
+            do
+            {
+                this.PrintBlankLine();
+                this.Print(DisplayText);
+                text = this.GetResponse();
+            } while (!text.All(char.IsLetter) || text.All(char.IsWhiteSpace));
+
+            return text.ToLower();
+        }
+
+        /// <summary>
         /// Reads a String (single letter) from the console using Console.ReadLine.
         /// </summary>
         /// <remarks>
