@@ -25,5 +25,25 @@ namespace EVLlib.ConsoleTools
             this.border = $"+ {new string('-', Console.WindowWidth / 2)} +";
             this.dismiss = "Press any key to dismiss...";
         }
+
+        /// <summary>
+        /// Application header, also sets the console title.
+        /// </summary>
+        public void PrintHeader()
+        {
+            this.SetConsoleTitle(this.title);
+            this.PrintBlankLine();
+            this.ChangeTextColour(ConsoleColor.Cyan);
+            this.PrintToCenterScreen(this.title);
+            this.ChangeTextColour(ConsoleColor.White);
+            this.PrintToCenterScreen(this.version);
+            this.PrintToCenterScreen(this.release);
+            this.PrintToCenterScreen(this.contact);
+            this.PrintToCenterScreen(this.border);
+            this.PrintBlankLine();
+            this.PrintToCenterScreen(this.dismiss);
+            this.ResetTextColour();
+            this.AwaitResponse();
+        }
     }
 }
