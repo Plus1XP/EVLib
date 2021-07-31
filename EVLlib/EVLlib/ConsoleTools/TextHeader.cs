@@ -93,5 +93,32 @@ namespace EVLlib.ConsoleTools
             this.ResetTextColour();
             this.AwaitResponse();
         }
+
+        /// <summary>
+        /// Application header, also sets the console title.
+        /// </summary>
+        /// <param name="title">Title of application.</param>
+        /// <param name="version">Version of application.</param>
+        /// <param name="release">Date of build.</param>
+        public void PrintHeader(string title, string version, string release)
+        {
+            this.title = title;
+            this.version = version;
+            this.release = release;
+
+            this.SetConsoleTitle(this.title);
+            this.PrintBlankLine();
+            this.ChangeTextColour(ConsoleColor.Cyan);
+            this.PrintToCenterScreen(this.title);
+            this.ChangeTextColour(ConsoleColor.White);
+            this.PrintToCenterScreen(this.version);
+            this.PrintToCenterScreen(this.release);
+            this.PrintToCenterScreen(this.contact);
+            this.PrintToCenterScreen(this.border);
+            this.PrintBlankLine();
+            this.PrintToCenterScreen(this.dismiss);
+            this.ResetTextColour();
+            this.AwaitResponse();
+        }
     }
 }
