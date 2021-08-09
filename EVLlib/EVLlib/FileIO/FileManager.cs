@@ -16,5 +16,15 @@ namespace EVLlib.FileIO
         {
             return Directory.Exists(filePath);
         }
+
+        /// <summary>
+        /// Checks if file exists.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <returns>Boolean true if file exists, false if file does not exist.</returns>
+        public bool IsFileCreated(string filePath)
+        {
+            return File.Exists(filePath);
+        }
     }
 }
