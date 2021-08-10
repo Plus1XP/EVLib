@@ -26,5 +26,14 @@ namespace EVLlib.FileIO
         {
             return File.Exists(filePath);
         }
+
+        /// <summary>
+        /// Creates folder in the specified path.
+        /// </summary>
+        /// <param name="folderPath">Path to folder.</param>
+        public void CreateFolder(string folderPath)
+        {
+            Directory.CreateDirectory(folderPath);
+        }
     }
 }
