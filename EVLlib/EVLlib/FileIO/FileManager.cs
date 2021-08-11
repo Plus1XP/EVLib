@@ -35,5 +35,14 @@ namespace EVLlib.FileIO
         {
             Directory.CreateDirectory(folderPath);
         }
+
+        /// <summary>
+        /// Creates file in the specified path.
+        /// </summary>
+        /// <param name="filePath">Path to a file.</param>
+        public void CreateFile(string filePath)
+        {
+            File.Create(filePath).Close();
+        }
     }
 }
