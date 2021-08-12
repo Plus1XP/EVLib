@@ -44,5 +44,14 @@ namespace EVLlib.FileIO
         {
             File.Create(filePath).Close();
         }
+
+        /// <summary>
+        /// Overwrites file with an empty string.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        public void ClearFile(string filePath)
+        {
+            File.WriteAllText(filePath, string.Empty);
+        }
     }
 }
