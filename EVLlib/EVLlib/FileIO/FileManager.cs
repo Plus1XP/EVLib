@@ -53,5 +53,14 @@ namespace EVLlib.FileIO
         {
             File.WriteAllText(filePath, string.Empty);
         }
+
+        /// <summary>
+        /// Deletes folder from the specified path.
+        /// </summary>
+        /// <param name="folderPath">Path to folder.</param>
+        public void DeleteFolder(string folderPath)
+        {
+            Directory.Delete(folderPath);
+        }
     }
 }
