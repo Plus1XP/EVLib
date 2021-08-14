@@ -62,5 +62,14 @@ namespace EVLlib.FileIO
         {
             Directory.Delete(folderPath);
         }
+
+        /// <summary>
+        /// Deletes file from the specified path.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        public void DeleteFile(string filePath)
+        {
+            File.Delete(filePath);
+        }
     }
 }
