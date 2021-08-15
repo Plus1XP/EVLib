@@ -71,5 +71,18 @@ namespace EVLlib.FileIO
         {
             File.Delete(filePath);
         }
+
+        /// <summary>
+        /// Writes a String to a file on disk.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <param name="Value">String value to save.</param>
+        public void SaveToFile(string filePath, string Value)
+        {
+            File.WriteAllText(filePath, Value);
+            //StreamWriter writeFile = new StreamWriter(filePath);
+            //writeFile.Write(Value);
+            //writeFile.Close();
+        }
     }
 }
