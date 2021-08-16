@@ -84,5 +84,15 @@ namespace EVLlib.FileIO
             //writeFile.Write(Value);
             //writeFile.Close();
         }
+
+        /// <summary>
+        /// Writes an array of bytes to a file on disk.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <param name="Value">Byte array to save.</param>
+        public void SaveToFile(string filePath, byte[] Value)
+        {
+            File.WriteAllBytes(filePath, Value);
+        }
     }
 }
