@@ -104,5 +104,15 @@ namespace EVLlib.FileIO
         {
             return File.ReadAllText(filePath);
         }
+
+        /// <summary>
+        /// Reads bytes from file on disk.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <returns>String containing all text from file.</returns>
+        public byte[] ReadBytesFromFile(string filePath)
+        {
+            return File.ReadAllBytes(filePath);
+        }
     }
 }
