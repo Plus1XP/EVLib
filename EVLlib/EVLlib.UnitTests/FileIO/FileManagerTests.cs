@@ -1,0 +1,25 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
+namespace EVLlib.FileIO.Tests
+{
+    [TestClass]
+    public class FileManagerTests
+    {
+        private string buildFolder = Directory.GetCurrentDirectory();
+        private const string folderName = "PleaseDelete";
+        private const string fileName = "PleaseDelete.txt";
+        private const string sampleString = "Hello, I have nothing important inside (:";
+        private byte[] sampleBytes = { 72, 101, 108, 108, 111, 44, 32, 73, 32, 104, 97, 118, 101,
+            32, 110, 111, 116, 104, 105, 110, 103, 32, 105, 109, 112, 111, 114, 116, 97, 110,
+            116, 32, 105, 110, 115, 105, 100, 101, 32, 40, 58 };
+
+
+        string testDirectory = $"{Directory.GetCurrentDirectory()}\\{folderName}";
+        string testFile = $"{Directory.GetCurrentDirectory()}\\{folderName}\\{fileName}";
+    }
+}
