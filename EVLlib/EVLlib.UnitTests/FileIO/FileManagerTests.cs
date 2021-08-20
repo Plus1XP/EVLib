@@ -21,5 +21,29 @@ namespace EVLlib.FileIO.Tests
 
         string testDirectory = $"{Directory.GetCurrentDirectory()}\\{folderName}";
         string testFile = $"{Directory.GetCurrentDirectory()}\\{folderName}\\{fileName}";
+
+
+        [TestMethod]
+        public void FolderCreatedTests()
+        {
+            FileManager fileManager = new FileManager();
+
+            bool expected = Directory.Exists(testDirectory);
+            bool actual = fileManager.IsFolderCreated(testDirectory);
+
+            Assert.AreEqual(expected, actual);
+
+            if (!expected)
+            {
+                Directory.CreateDirectory(testDirectory);
+
+                bool expected2 = Directory.Exists(testDirectory);
+                bool actual2 = fileManager.IsFolderCreated(testDirectory);
+
+                Assert.AreEqual(expected2, actual2);
+            }
+            
+            Directory.Delete(testDirectory);
+        }
     }
 }
