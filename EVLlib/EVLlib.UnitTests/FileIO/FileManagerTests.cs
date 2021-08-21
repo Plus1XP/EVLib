@@ -45,5 +45,30 @@ namespace EVLlib.FileIO.Tests
             
             Directory.Delete(testDirectory);
         }
+
+        [TestMethod]
+        public void FilecreatedTest()
+        {
+            FileManager fileManager = new FileManager();
+
+            bool expected = File.Exists(testFile);
+            bool actual = fileManager.IsFileCreated(testFile);
+
+            Assert.AreEqual(expected, actual);
+
+            if (!expected)
+            {
+                Directory.CreateDirectory(testDirectory);
+                File.Create(testFile).Close();
+
+                bool expected2 = File.Exists(testFile);
+                bool actual2 = fileManager.IsFileCreated(testFile);
+
+                Assert.AreEqual(expected2, actual2);
+            }
+
+            File.Delete(testFile);
+            Directory.Delete(testDirectory);
+        }
     }
 }
