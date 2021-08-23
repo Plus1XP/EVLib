@@ -83,5 +83,21 @@ namespace EVLlib.FileIO.Tests
 
             Directory.Delete(testDirectory);
         }
+
+        [TestMethod]
+        public void CreateFileTest()
+        {
+            Directory.CreateDirectory(testDirectory);
+
+            FileManager fileManager = new FileManager();
+            fileManager.CreateFile(testFile);
+
+            string expected = testFile;
+
+            Assert.IsTrue(File.Exists(expected));
+
+            File.Delete(testFile);
+            Directory.Delete(testDirectory);
+        }
     }
 }
