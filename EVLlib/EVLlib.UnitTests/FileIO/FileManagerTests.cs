@@ -99,5 +99,25 @@ namespace EVLlib.FileIO.Tests
             File.Delete(testFile);
             Directory.Delete(testDirectory);
         }
+
+        [TestMethod]
+        public void ClearFileTest()
+        {
+            Directory.CreateDirectory(testDirectory);
+            File.WriteAllText(testFile, sampleString);
+
+            Assert.AreEqual(File.ReadAllText(testFile), sampleString);
+
+            FileManager fileManager = new FileManager();
+            fileManager.ClearFile(testFile);
+
+            string actual = File.ReadAllText(testFile);
+            string expected = string.Empty;
+
+            Assert.AreEqual(actual, expected);
+
+            File.Delete(testFile);
+            Directory.Delete(testDirectory);
+        }
     }
 }
