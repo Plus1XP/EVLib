@@ -119,5 +119,24 @@ namespace EVLlib.FileIO.Tests
             File.Delete(testFile);
             Directory.Delete(testDirectory);
         }
+
+        [TestMethod]
+        public void DeleteFolderTest()
+        {
+            FileManager fileManager = new FileManager();
+
+            bool isDirectoryCreated = Directory.Exists(testDirectory);
+
+            if (!isDirectoryCreated)
+            {
+                Directory.CreateDirectory(testDirectory);
+            }
+
+            fileManager.DeleteFolder(testDirectory);
+
+            isDirectoryCreated = Directory.Exists(testDirectory);
+
+            Assert.IsFalse(isDirectoryCreated);
+        }
     }
 }
