@@ -155,5 +155,22 @@ namespace EVLlib.FileIO.Tests
             File.Delete(testFile);
             Directory.Delete(testDirectory);
         }
+
+        [TestMethod]
+        public void SaveToFileTest()
+        {
+            Directory.CreateDirectory(testDirectory);
+
+            FileManager fileManager = new FileManager();
+            fileManager.SaveToFile(testFile, sampleString);
+
+            string expected = sampleString;
+            string actual = File.ReadAllText(testFile);
+
+            Assert.AreEqual(expected, actual);
+
+            File.Delete(testFile);
+            Directory.Delete(testDirectory);
+        }
     }
 }
