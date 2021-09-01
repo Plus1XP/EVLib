@@ -157,7 +157,7 @@ namespace EVLlib.FileIO.Tests
         }
 
         [TestMethod]
-        public void SaveToFileTest()
+        public void SaveStringToFileTest()
         {
             Directory.CreateDirectory(testDirectory);
 
