@@ -191,7 +191,7 @@ namespace EVLlib.FileIO.Tests
         }
 
         [TestMethod]
-        public void ReadFromFileTest()
+        public void ReadStringFromFileTest()
         {
             Directory.CreateDirectory(testDirectory);
             File.WriteAllText(testFile, sampleString);
