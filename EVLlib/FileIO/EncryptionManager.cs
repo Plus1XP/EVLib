@@ -19,5 +19,18 @@ namespace EVLlib.FileIO
         {
             aes = Aes.Create();
         }
+
+        /// <summary>
+        /// Encrypts a String of data to a file on disk using AES.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <param name="dataToEncrypt">String of data to encrypt.</param>
+        /// <param name="keyPhrase">Key to encrypt the data stream.</param>
+        public void EncryptStringToFile(string filePath, string dataToEncrypt, string keyPhrase)
+        {
+            SetEncryptionKey(keyPhrase);
+            SetAesKey();
+            EncryptStream(filePath, dataToEncrypt);
+        }
     }
 }
