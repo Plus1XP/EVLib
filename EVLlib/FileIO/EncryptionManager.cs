@@ -32,5 +32,18 @@ namespace EVLlib.FileIO
             SetAesKey();
             EncryptStream(filePath, dataToEncrypt);
         }
+
+        /// <summary>
+        /// Decrypts data from a file on disk to a String using AES.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <param name="keyPhrase">Key to decrypt the data stream.</param>
+        /// <returns>Decrypted String.</returns>
+        public string DecryptStringFromFile(string filePath, string keyPhrase)
+        {
+            SetEncryptionKey(keyPhrase);
+            GetAesKey();
+            return DecryptStream(filePath);
+        }
     }
 }
