@@ -45,5 +45,17 @@ namespace EVLlib.FileIO
             GetAesKey();
             return DecryptStream(filePath);
         }
+
+        /// <summary>
+        /// Encryption key used to encrypt the stream.
+        /// </summary>
+        /// <remarks>
+        /// The same value must be used for encrypting and decrypting the stream.
+        /// </remarks>
+        /// <param name="keyPhrase">Key to decrypt the data stream.</param>
+        private void SetEncryptionKey(string keyPhrase)
+        {
+            key = Encoding.ASCII.GetBytes(keyPhrase);
+        }
     }
 }
