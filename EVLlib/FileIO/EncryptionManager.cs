@@ -57,5 +57,18 @@ namespace EVLlib.FileIO
         {
             key = Encoding.ASCII.GetBytes(keyPhrase);
         }
+
+        /// <summary>
+        /// Configures the encrytion key and IV 
+        /// </summary>
+        /// <remarks>
+        /// The IV is stored at the begining of the file.
+        /// The Key and IV will both be used for encrypting and decrypting.
+        /// </remarks>
+        private void SetAesKey()
+        {
+            aes.Key = this.key;
+            iv = aes.IV;
+        }
     }
 }
