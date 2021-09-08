@@ -70,5 +70,13 @@ namespace EVLlib.FileIO
             aes.Key = this.key;
             iv = aes.IV;
         }
+
+        /// <summary>
+        /// Reads the IV value from the begining of the file.
+        /// </summary>
+        private void GetAesKey()
+        {
+            iv = new byte[aes.IV.Length];
+        }
     }
 }
