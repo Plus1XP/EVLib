@@ -78,5 +78,36 @@ namespace EVLlib.FileIO
         {
             iv = new byte[aes.IV.Length];
         }
+
+        /// <summary>
+        /// Stream and Encrypt String data to a file on disk using AES.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <param name="dataToEncrypt">String of data to encrypt.</param>
+        private void EncryptStream(string filePath, string dataToEncrypt)
+        {
+            //Create a file stream
+            FileStream dataStream = new FileStream(filePath, FileMode.OpenOrCreate);
+
+            //Stores IV at the beginning of the file.
+            //This information will be used for decryption.
+            dataStream.Write(iv, 0, iv.Length);
+
+            //Create a CryptoStream, pass it the FileStream, and encrypt
+            //it with the Aes class. 
+            CryptoStream cryptStream = new CryptoStream(dataStream, aes.CreateEncryptor(), CryptoStreamMode.Write);
+
+            //Create a StreamWriter for easy writing to the file stream.  
+            StreamWriter streamWriter = new StreamWriter(cryptStream);
+
+            //Write to the stream.  
+            streamWriter.Write(dataToEncrypt);
+
+            // Close streams.
+            streamWriter.Close();
+            cryptStream.Close();
+            dataStream.Close();
+
+        }
     }
 }
