@@ -109,5 +109,43 @@ namespace EVLlib.FileIO
             dataStream.Close();
 
         }
+
+        /// <summary>
+        /// Stream and Decrypt data from a file on disk to a String using AES.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <returns>Decrypted String.</returns>
+        private string DecryptStream(string filePath)
+        {
+            //Create a file stream
+            FileStream dataStream = new FileStream(filePath, FileMode.Open);
+
+            //Reads IV value from beginning of the file.
+            dataStream.Read(iv, 0, iv.Length);
+
+            //Create a CryptoStream, pass it the file stream, and decrypt
+            //it with the Aes class using the key and IV.
+            CryptoStream cryptStream = new CryptoStream(dataStream, aes.CreateDecryptor(key, iv), CryptoStreamMode.Read);
+
+            //Read the stream.
+            StreamReader streamReader = new StreamReader(cryptStream);
+
+            //MemoryStream memoryStream = new MemoryStream();
+
+            //cryptStream.CopyTo(memoryStream);
+            //byte[] data = memoryStream.ToArray();
+
+            string decryptedString = streamReader.ReadToEnd();
+
+            // Convert string stream to byte array.
+            //byte[] data = File.ReadAllBytes(test);
+
+            // Close streams.
+            streamReader.Close();
+            cryptStream.Close();
+            dataStream.Close();
+
+            return decryptedString;
+        }
     }
 }
