@@ -12,5 +12,16 @@ namespace EVLlib.FileIO
         {
 
         }
+
+        /// <summary>
+        /// Converts a String to a UTC DateTime equivalent.
+        /// </summary>
+        /// <param name="dateTime">String representation of a date and time.</param>
+        /// <returns>UTC DateTime.</returns>
+        public DateTime ParseDateTimeToUTC(string dateTime)
+        {
+            DateTime.TryParse(dateTime, out DateTime parsedDateTime);
+            return parsedDateTime.ToUniversalTime();
+        }
     }
 }
