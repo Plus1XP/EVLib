@@ -23,5 +23,16 @@ namespace EVLlib.FileIO
             DateTime.TryParse(dateTime, out DateTime parsedDateTime);
             return parsedDateTime.ToUniversalTime();
         }
+
+        /// <summary>
+        /// converts a String to a Local DateTime equivalent.
+        /// </summary>
+        /// <param name="dateTime">String representation of a date and time.</param>
+        /// <returns>Local DateTime.</returns>
+        public DateTime ParseDateTimeToLocal(string dateTime)
+        {
+            DateTime.TryParse(dateTime, out DateTime parsedDateTime);
+            return parsedDateTime.ToLocalTime();
+        }
     }
 }
