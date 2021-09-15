@@ -34,5 +34,18 @@ namespace EVLlib.FileIO
             DateTime.TryParse(dateTime, out DateTime parsedDateTime);
             return parsedDateTime.ToLocalTime();
         }
+
+        /// <summary>
+        /// Creates an iCalendar entry header.
+        /// (Note: Product ID must be in the format - CompanyName//Product//EN)
+        /// </summary>
+        /// <param name="productID">Specifies the identifier for the product that created the iCalendar object.</param>
+        public void CreateCalendarEntry(string productID)
+        {
+            this.calendarEntry = new StringBuilder();
+            this.calendarEntry.AppendLine("BEGIN:VCALENDAR");
+            this.calendarEntry.AppendLine("VERSION:2.0");
+            this.calendarEntry.AppendLine($"PRODID:-//{productID}");
+        }
     }
 }
