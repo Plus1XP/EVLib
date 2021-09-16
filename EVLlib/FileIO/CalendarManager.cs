@@ -47,5 +47,27 @@ namespace EVLlib.FileIO
             this.calendarEntry.AppendLine("VERSION:2.0");
             this.calendarEntry.AppendLine($"PRODID:-//{productID}");
         }
+
+        /// <summary>
+        /// Adds GMT timezone to the iCalendar entry.
+        /// </summary>
+        public void CreateGMTCalendarTimeZoneEntry()
+        {
+            this.calendarEntry.AppendLine("BEGIN:VTIMEZONE");
+            this.calendarEntry.AppendLine("TZID:GMT Standard Time");
+            this.calendarEntry.AppendLine("BEGIN:STANDARD");
+            this.calendarEntry.AppendLine("DTSTART:16011028T020000");
+            this.calendarEntry.AppendLine("RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10");
+            this.calendarEntry.AppendLine("TZOFFSETTO:+0100");
+            this.calendarEntry.AppendLine("TZOFFSETFROM:-0000");
+            this.calendarEntry.AppendLine("END:STANDARD");
+            this.calendarEntry.AppendLine("BEGIN:DAYLIGHT");
+            this.calendarEntry.AppendLine("DTSTART:16010325T010000");
+            this.calendarEntry.AppendLine("RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3");
+            this.calendarEntry.AppendLine("TZOFFSETTO:-0000");
+            this.calendarEntry.AppendLine("TZOFFSETFROM:+0100");
+            this.calendarEntry.AppendLine("END:DAYLIGHT");
+            this.calendarEntry.AppendLine("END:VTIMEZONE");
+        }
     }
 }
