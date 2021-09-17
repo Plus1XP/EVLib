@@ -36,9 +36,11 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
-        /// Creates an iCalendar entry header.
-        /// (Note: Product ID must be in the format - CompanyName//Product//EN)
+        /// Starts an iCaldendar entry.
         /// </summary>
+        /// <remarks>
+        /// (Note: Product ID must be in the format - CompanyName//Product//EN)
+        /// </remarks>
         /// <param name="productID">Specifies the identifier for the product that created the iCalendar object.</param>
         public void CreateCalendarEntry(string productID)
         {
