@@ -71,5 +71,32 @@ namespace EVLlib.FileIO
             this.calendarEntry.AppendLine("END:DAYLIGHT");
             this.calendarEntry.AppendLine("END:VTIMEZONE");
         }
+
+        /// <summary>
+        /// Starts an iCalendar event.
+        /// </summary>
+        /// <param name="startTime">Event UTC DateTime Start.</param>
+        /// <param name="endTime">Event UTC DateTime End.</param>
+        /// <param name="subject">Event Subject.</param>
+        /// <param name="location">Event location.</param>
+        /// <param name="description">Event Description.</param>
+        public void CreateCalendarEvent(DateTime startTime, DateTime endTime, string subject, string location, string description)
+        {
+            this.calendarEntry.AppendLine("BEGIN:VEVENT");
+
+            // Specify the date time with the time zone stamp. 
+            /*
+            this.calendarEntry.AppendLine("DTSTART;TZID=GMT Standard Time:" + startTime.ToString("yyyyMMddTHHmm00"));
+            this.calendarEntry.AppendLine("DTEND;TZID=GMT Standard Time:" + endTime.ToString("yyyyMMddTHHmm00"));           
+            */
+
+            // Specify the date time in UTC (Z).
+            this.calendarEntry.AppendLine("DTSTART:" + startTime.ToString("yyyyMMddTHHmm00Z"));
+            this.calendarEntry.AppendLine("DTEND:" + endTime.ToString("yyyyMMddTHHmm00Z"));
+
+            this.calendarEntry.AppendLine("SUMMARY:" + subject);
+            this.calendarEntry.AppendLine("LOCATION:" + location);
+            this.calendarEntry.AppendLine("DESCRIPTION:" + description);
+        }
     }
 }
