@@ -98,5 +98,25 @@ namespace EVLlib.FileIO
             this.calendarEntry.AppendLine("LOCATION:" + location);
             this.calendarEntry.AppendLine("DESCRIPTION:" + description);
         }
+
+        /// <summary>
+        /// Adds alarm to the iCalendar entry.
+        /// </summary>
+        /// <remarks>
+        /// -PT will alaram before the trigger,
+        /// PT will alarma after the trigger.
+        /// </remarks>
+        /// <param name="trigger">Specifies when the alarm will trigger (minutes).</param>
+        /// <param name="subject">Alarm Subject.</param>
+        public void CreateCalendarAlarmEntry(int trigger, string subject)
+        {
+            this.calendarEntry.AppendLine("BEGIN: VALARM");
+
+            // Sets a duration or time to trigger the arlarm (Mins or Hours).
+            this.calendarEntry.AppendLine("TRIGGER:-PT" + trigger + "M");
+            this.calendarEntry.AppendLine("ACTION:DISPLAY");
+            this.calendarEntry.AppendLine("DESCRIPTION:" + subject);
+            this.calendarEntry.AppendLine("END:VALARM");
+        }
     }
 }
