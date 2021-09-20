@@ -118,5 +118,13 @@ namespace EVLlib.FileIO
             this.calendarEntry.AppendLine("DESCRIPTION:" + subject);
             this.calendarEntry.AppendLine("END:VALARM");
         }
+
+        /// <summary>
+        /// Closes the iCalendar event.
+        /// </summary>
+        public void CloseEventEntry()
+        {
+            this.calendarEntry.AppendLine("END:VEVENT");
+        }
     }
 }
