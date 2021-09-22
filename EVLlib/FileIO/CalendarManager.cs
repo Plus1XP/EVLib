@@ -134,5 +134,14 @@ namespace EVLlib.FileIO
         {
             this.calendarEntry.AppendLine("END:VCALENDAR");
         }
+
+        /// <summary>
+        /// Retrives all iCalendar entries.
+        /// </summary>
+        /// <returns>iCalendar entries as a String.</returns>
+        private string RetrieveCalendarEntries()
+        {
+            return this.calendarEntry.ToString();
+        }
     }
 }
