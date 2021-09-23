@@ -143,5 +143,21 @@ namespace EVLlib.FileIO
         {
             return this.calendarEntry.ToString();
         }
+
+        /// <summary>
+        /// If ICS file exists, clears file. Otherwise creates a new file.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        private void ValidateFileIsUsable(string filePath)
+        {
+            if (this.IsFileCreated(filePath))
+            {
+                this.ClearFile(filePath);
+            }
+            else
+            {
+                this.CreateFile(filePath);
+            }
+        }
     }
 }
