@@ -159,5 +159,21 @@ namespace EVLlib.FileIO
                 this.CreateFile(filePath);
             }
         }
+
+        /// <TODO>
+        /// Validate if file was save sucessfully or not.
+        /// </TODO>
+        /// 
+        /// <summary>
+        /// Writes all iCalendar entries to an ICS file.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <returns>Validaton string if succesfull.</returns>
+        public string CreateICSFile(string filePath)
+        {
+            this.ValidateFileIsUsable(filePath);
+            this.SaveToFile(filePath, this.RetrieveCalendarEntries());
+            return "ICS file created";
+        }
     }
 }
