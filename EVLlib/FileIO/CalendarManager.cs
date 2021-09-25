@@ -175,5 +175,19 @@ namespace EVLlib.FileIO
             this.SaveToFile(filePath, this.RetrieveCalendarEntries());
             return "ICS file created";
         }
+
+        /// <TODO>
+        /// Validate if file was read sucessfully or not.
+        /// </TODO>
+        /// 
+        /// <summary>
+        /// Checks if ICS file exists then reads it.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <returns>All lines from ICS file, or "No Data" depending on if file exists.</returns>
+        public string ReadICSFile(string filePath)
+        {
+            return this.IsFileCreated(filePath) ? this.ReadStringFromFile(filePath) : "No Data";
+        }
     }
 }
