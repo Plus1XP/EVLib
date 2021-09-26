@@ -189,5 +189,27 @@ namespace EVLlib.FileIO
         {
             return this.IsFileCreated(filePath) ? this.ReadStringFromFile(filePath) : "No Data";
         }
+
+        /// <TODO>
+        /// Validate if file was deleted sucessfully or not.
+        /// </TODO>
+        /// 
+        /// <summary>
+        /// Checks if ICS file exists then deletes it.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <returns>Confirmation on if the ICS file was deleted.</returns>
+        public string DeleteICSFile(string filePath)
+        {
+            if (this.IsFileCreated(filePath))
+            {
+                this.DeleteFile(filePath);
+                return $"{filePath} Deleted";
+            }
+            else
+            {
+                return "No File";
+            }
+        }
     }
 }
