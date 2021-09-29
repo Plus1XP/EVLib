@@ -13,6 +13,17 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Sets a single node attribute value from boolean.
+        /// </summary>
+        /// <param name="node">XML node.</param>
+        /// <param name="attributeName">XML attribute name.</param>
+        /// <param name="attributeValue">boolean value to set XML attribute node.</param>
+        public void SetNodeAttributeFromBool(XmlNode node, string attributeName, bool attributeValue)
+        {
+            this.SetNodeAttribute(node, attributeName, Convert.ToString(attributeValue));
+        }
+
+        /// <summary>
         /// Sets a single node attribute.
         /// </summary>
         /// <param name="node">XML node.</param>
