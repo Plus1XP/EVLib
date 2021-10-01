@@ -13,6 +13,17 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Sets a single node attribute value from string.
+        /// </summary>
+        /// <param name="node">XML node.</param>
+        /// <param name="attributeName">XML attribute name.</param>
+        /// <param name="attributeValue">string value to set XML attribute node.</param>
+        private void SetNodeAttributeFromString(XmlNode node, string attributeName, string attributeValue)
+        {
+            this.SetNodeAttribute(node, attributeName, attributeValue);
+        }
+
+        /// <summary>
         /// Sets a single node attribute value from integer.
         /// </summary>
         /// <param name="node">XML node.</param>
