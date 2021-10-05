@@ -13,6 +13,17 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Gets a single node attribute string value.
+        /// </summary>
+        /// <param name="node">XML node.</param>
+        /// <param name="attributeName">XML attribute name.</param>
+        /// <returns>XML attribute value as string.</returns>
+        private string GetNodeAttributeValueAsString(XmlNode node, string attributeName)
+        {
+            return this.GetNodeAttribute(node, attributeName).Value;
+        }
+
+        /// <summary>
         /// Gets a single node attribute integer value.
         /// </summary>
         /// <param name="node">XML Node.</param>
