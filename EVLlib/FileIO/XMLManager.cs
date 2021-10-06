@@ -13,6 +13,21 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Gets attribute boolean vlaue from XML attribute.
+        /// </summary>
+        /// <param name="attribute">XML attribute.</param>
+        /// <returns>XML attribute value as boolean.</returns>
+        public bool GetAttributeValueAsBool(XmlAttribute attribute)
+        {
+            if (attribute == null)
+            {
+                return true;
+            }
+
+            return Convert.ToBoolean(attribute.Value);
+        }
+
+        /// <summary>
         /// Gets a single node attribute string value.
         /// </summary>
         /// <param name="node">XML node.</param>
