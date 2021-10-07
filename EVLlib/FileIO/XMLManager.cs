@@ -13,6 +13,21 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Gets attribute integer value from XML attribute.
+        /// </summary>
+        /// <param name="attribute">XML attribute.</param>
+        /// <returns>XML attribute value as integer.</returns>
+        public int GetAttributeValueAsInt(XmlAttribute attribute)
+        {
+            if (attribute == null)
+            {
+                return 15;
+            }
+
+            return Convert.ToInt32(attribute.Value);
+        }
+
+        /// <summary>
         /// Gets attribute boolean vlaue from XML attribute.
         /// </summary>
         /// <param name="attribute">XML attribute.</param>
