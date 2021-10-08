@@ -13,6 +13,16 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Gets attribute string value from XML attribute.
+        /// </summary>
+        /// <param name="attribute">XML attribute.</param>
+        /// <returns>XML attribute value as string.</returns>
+        public string GetAttributeValueAsString(XmlAttribute attribute)
+        {
+            return attribute.Value;
+        }
+
+        /// <summary>
         /// Gets attribute integer value from XML attribute.
         /// </summary>
         /// <param name="attribute">XML attribute.</param>
