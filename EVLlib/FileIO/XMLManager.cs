@@ -13,6 +13,29 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Gets attribute from XML node list.
+        /// </summary>
+        /// <param name="nodeList">XML node list.</param>
+        /// <param name="nodeName">XML node name.</param>
+        /// <param name="nodeValue">XML node value.</param>
+        /// <param name="attributeName">XML attribute name.</param>
+        /// <returns>XML attribute.</returns>
+        public XmlAttribute GetAttributeFromNodeList(XmlNodeList nodeList, string nodeName, string nodeValue, string attributeName)
+        {
+            XmlAttribute elementAttribute = null;
+
+            foreach (XmlNode node in nodeList)
+            {
+                if (this.GetNodeAttributeValueAsString(node, nodeName).Equals(nodeValue))
+                {
+                    elementAttribute = this.GetNodeAttribute(node, attributeName);
+                }
+            }
+
+            return elementAttribute;
+        }
+
+        /// <summary>
         /// Gets attribute string value from XML attribute.
         /// </summary>
         /// <param name="attribute">XML attribute.</param>
