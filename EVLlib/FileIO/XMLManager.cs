@@ -13,6 +13,16 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Saves XML document to file.
+        /// </summary>
+        /// <param name="xmlDoc">XML document to save.</param>
+        /// <param name="xmlFileLoaction">Path to XML file.</param>
+        public void SaveXmlDocument(XmlDocument xmlDoc, string xmlFileLoaction)
+        {
+            xmlDoc.Save(xmlFileLoaction);
+        }
+
+        /// <summary>
         /// Gets a single node from an XML node list.
         /// </summary>
         /// <param name="nodeList">XML node list.</param>
