@@ -13,6 +13,20 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Loads XML node list from XML document.
+        /// </summary>
+        /// <param name="xmlDoc">XML Document to load.</param>
+        /// <param name="nodePath">Path to XML file.</param>
+        /// <returns>XML node list.</returns>
+        public XmlNodeList LoadNodeList(XmlDocument xmlDoc, string nodePath)
+        {
+            XmlNodeList nodeList;
+            nodeList = xmlDoc.SelectNodes(nodePath);
+
+            return nodeList;
+        }
+
+        /// <summary>
         /// Saves XML document to file.
         /// </summary>
         /// <param name="xmlDoc">XML document to save.</param>
