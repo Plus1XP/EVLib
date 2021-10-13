@@ -13,6 +13,19 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Loads XML document from file.
+        /// </summary>
+        /// <param name="xmlFileLoaction">Path to XML file.</param>
+        /// <returns>XML Document.</returns>
+        public XmlDocument LoadXmlDocument(string xmlFileLoaction)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(this.ReadStringFromFile(xmlFileLoaction));
+
+            return xmlDoc;
+        }
+
+        /// <summary>
         /// Loads XML node list from XML document.
         /// </summary>
         /// <param name="xmlDoc">XML Document to load.</param>
