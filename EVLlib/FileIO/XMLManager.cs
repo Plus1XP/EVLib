@@ -13,6 +13,24 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
+        /// Sets integer value to attribute in XML node.
+        /// </summary>
+        /// <param name="xmlFileLocation">Path to XML file.</param>
+        /// <param name="nodePath">XML node path.</param>
+        /// <param name="nodeName">XML node name.</param>
+        /// <param name="nodeValue">XML node value.</param>
+        /// <param name="attributeName">XML Attribute name.</param>
+        /// <param name="attributeValue">Integer value to set XML attribute value.</param>
+        public void SetNodeAttributeValueFromInt(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName, int attributeValue)
+        {
+            XmlDocument xmlDoc = this.LoadXmlDocument(xmlFileLocation);
+            XmlNodeList nodeList = this.LoadNodeList(xmlDoc, nodePath);
+            XmlNode node = this.GetNodeFromNodeList(nodeList, nodeName, nodeValue);
+            this.SetNodeAttributeFromInt(node, attributeName, attributeValue);
+            this.SaveXmlDocument(xmlDoc, xmlFileLocation);
+        }
+
+        /// <summary>
         /// Loads XML document from file.
         /// </summary>
         /// <param name="xmlFileLoaction">Path to XML file.</param>
