@@ -38,5 +38,17 @@ namespace EVLlib.FileIO
 
         private readonly Encoding StringEncoding = Encoding.UTF8;
         private readonly RandomNumberGenerator Random = RandomNumberGenerator.Create();
+
+        /// <summary>
+        /// Encrypts a String of data to a file on disk using AES.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <param name="stringToEncrypt">String of data to encrypt.</param>
+        /// <param name="password">Password used to encrypt / decrypt data.</param>
+        public void EncryptToFile(string filePath, string stringToEncrypt, string password)
+        {
+            byte[] encryptedByteArray = Encrypt(stringToEncrypt, password);
+            SaveToFile(filePath, encryptedByteArray);
+        }
     }
 }
