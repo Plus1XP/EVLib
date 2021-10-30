@@ -83,5 +83,17 @@ namespace EVLlib.FileIO
         {
             return Encrypt(stringToEncrypt, password);
         }
+
+        /// <summary>
+        /// Decrypts data to a String from a file on disk using AES.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <param name="password">Password used to encrypt / decrypt data.</param>
+        /// <returns>Decrypted String.</returns>
+        public string DecryptFromFile(string filePath, string password)
+        {
+            byte[] encryptedByteArray = ReadBytesFromFile(filePath);
+            return Decrypt(encryptedByteArray, password);
+        }
     }
 }
