@@ -95,5 +95,27 @@ namespace EVLlib.FileIO
             byte[] encryptedByteArray = ReadBytesFromFile(filePath);
             return Decrypt(encryptedByteArray, password);
         }
+
+        /// <summary>
+        /// Decrypts a Base64 String encrypted of data using AES.
+        /// </summary>
+        /// <remarks>
+        /// Encoding.UTF8.GetString(bytes) does not convert a byte array containing
+        /// arbitrary bytes to a string. Instead, it converts a byte array that
+        /// is supposed to contain bytes making up an UTF8 encoded string back to
+        /// that string. If the byte array contains arbitrary bytes, such as the
+        /// result of encrypting text, it is almost certain to corrupt the data and/or
+        /// lose bytes. Instead, you should use a different method of converting
+        /// a byte array to a string and back. Base64 encoding has been choosen
+        /// for this purpose.
+        /// </remarks>
+        /// <param name="stringToDecrypt">String of data to Decrypt.</param>
+        /// <param name="password">Password used to encrypt / decrypt data.</param>
+        /// <returns>Decrypted String.</returns>
+        public string DecryptFromString(string stringToDecrypt, string password)
+        {
+            byte[] encryptedByteArray = Convert.FromBase64String(stringToDecrypt);
+            return Decrypt(encryptedByteArray, password);
+        }
     }
 }
