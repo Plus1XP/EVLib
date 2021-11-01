@@ -117,5 +117,16 @@ namespace EVLlib.FileIO
             byte[] encryptedByteArray = Convert.FromBase64String(stringToDecrypt);
             return Decrypt(encryptedByteArray, password);
         }
+
+        /// <summary>
+        /// Decrypts a Byte Array of encrypted data using AES.
+        /// </summary>
+        /// <param name="byteArrayToDecrypt">Byte Array to decrypt.</param>
+        /// <param name="password">Password used to encrypt / decrypt data.</param>
+        /// <returns>Decrypted String.</returns>
+        public string DecryptFromByteArray(byte[] byteArrayToDecrypt, string password)
+        {
+            return Decrypt(byteArrayToDecrypt, password);
+        }
     }
 }
