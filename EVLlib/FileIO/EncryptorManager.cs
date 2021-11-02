@@ -128,5 +128,57 @@ namespace EVLlib.FileIO
         {
             return Decrypt(byteArrayToDecrypt, password);
         }
+
+        /// <summary>
+        /// Encrypt String data to a Byte Array using AES.
+        /// </summary>
+        /// <remarks>
+        /// One additional security feature added is signing. otherwise
+        /// we have no way to verify whether some data is missing or some extra
+        /// data has been injected. With signing we will make sure our message
+        /// hasn’t been altered in any way. To implement this we will use Message
+        /// authentication code (MAC), more specifically HMAC-SHA256 which belongs
+        /// to a MAC subcategory called hash-based message authentication code.
+        /// In a simplified way the idea behind HMAC is to take your encrypted
+        /// message, hash it and then hash it again with an authentication key.
+        /// It’s important to note that this key must be different from the one
+        /// used for encrypting your message.
+        /// </remarks>
+        /// <param name="stringToEncrypt">String of data to encrypt.</param>
+        /// <param name="password">Password used to encrypt / decrypt data.</param>
+        /// <returns>AES Encrypted String as Byte Array.</returns>
+        private byte[] Encrypt(string stringToEncrypt, string password)
+        {
+            // encrypt
+            var keySalt = GenerateRandomBytes(PasswordSaltByteSize);
+            var key = GetKey(password, keySalt);
+            var iv = GenerateRandomBytes(AesBlockByteSize);
+
+            byte[] cipherText;
+            using (var aes = CreateAes())
+            using (var encryptor = aes.CreateEncryptor(key, iv))
+            {
+                var plainText = StringEncoding.GetBytes(stringToEncrypt);
+                cipherText = encryptor
+                    .TransformFinalBlock(plainText, 0, plainText.Length);
+            }
+
+            // sign
+            var authKeySalt = GenerateRandomBytes(PasswordSaltByteSize);
+            var authKey = GetKey(password, authKeySalt);
+
+            var result = MergeArrays(
+                additionalCapacity: SignatureByteSize,
+                authKeySalt, keySalt, iv, cipherText);
+
+            using (var hmac = new HMACSHA256(authKey))
+            {
+                var payloadToSignLength = result.Length - SignatureByteSize;
+                var signatureTag = hmac.ComputeHash(result, 0, payloadToSignLength);
+                signatureTag.CopyTo(result, payloadToSignLength);
+            }
+
+            return result;
+        }
     }
 }
