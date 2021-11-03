@@ -180,5 +180,74 @@ namespace EVLlib.FileIO
 
             return result;
         }
+
+        /// <summary>
+        /// Decrypt data from a Byte Array to a String using AES.
+        /// </summary>
+        /// <remarks>
+        /// One little thing maybe worth mentioning is the decryption part which
+        /// handles verification of the signature. There we are comparing all the
+        /// bytes of the signature without any branching. So no matter what data
+        /// we get, the verification should take a constant amount of time thus
+        /// mitigating any attempt to timing attack.
+        /// </remarks>
+        /// <param name="byteArrayToDecrypt">Byte Array to decrypt.</param>
+        /// <param name="password">Password used to encrypt / decrypt data.</param>
+        /// <returns>Decrypted String.</returns>
+        private string Decrypt(byte[] byteArrayToDecrypt, string password)
+        {
+            if (byteArrayToDecrypt is null
+                || byteArrayToDecrypt.Length < MinimumEncryptedMessageByteSize)
+            {
+                throw new ArgumentException("Invalid length of encrypted data");
+            }
+
+            var authKeySalt = byteArrayToDecrypt
+                .AsSpan(0, PasswordSaltByteSize).ToArray();
+            var keySalt = byteArrayToDecrypt
+                .AsSpan(PasswordSaltByteSize, PasswordSaltByteSize).ToArray();
+            var iv = byteArrayToDecrypt
+                .AsSpan(2 * PasswordSaltByteSize, AesBlockByteSize).ToArray();
+            var signatureTag = byteArrayToDecrypt
+                .AsSpan(byteArrayToDecrypt.Length - SignatureByteSize, SignatureByteSize).ToArray();
+
+            var cipherTextIndex = authKeySalt.Length + keySalt.Length + iv.Length;
+            var cipherTextLength =
+                byteArrayToDecrypt.Length - cipherTextIndex - signatureTag.Length;
+
+            var authKey = GetKey(password, authKeySalt);
+            var key = GetKey(password, keySalt);
+
+            // verify signature
+            using (var hmac = new HMACSHA256(authKey))
+            {
+                var payloadToSignLength = byteArrayToDecrypt.Length - SignatureByteSize;
+                var signatureTagExpected = hmac
+                    .ComputeHash(byteArrayToDecrypt, 0, payloadToSignLength);
+
+                // constant time checking to prevent timing attacks
+                var signatureVerificationResult = 0;
+                for (int i = 0; i < signatureTag.Length; i++)
+                {
+                    signatureVerificationResult |= signatureTag[i] ^ signatureTagExpected[i];
+                }
+
+                if (signatureVerificationResult != 0)
+                {
+                    throw new CryptographicException("Invalid signature");
+                }
+            }
+
+            // decrypt
+            using (var aes = CreateAes())
+            {
+                using (var encryptor = aes.CreateDecryptor(key, iv))
+                {
+                    var decryptedBytes = encryptor
+                        .TransformFinalBlock(byteArrayToDecrypt, cipherTextIndex, cipherTextLength);
+                    return StringEncoding.GetString(decryptedBytes);
+                }
+            }
+        }
     }
 }
