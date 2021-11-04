@@ -249,5 +249,25 @@ namespace EVLlib.FileIO
                 }
             }
         }
+
+        /// <summary>
+        /// Creates a new instance of the Aes class.
+        /// </summary>
+        /// <remarks>
+        /// Aes.Create() is the recommended way to get an instance of the best
+        /// available implementation of the Aes abstract class and that also
+        /// gives you good defaults, but I still prefer to be explicit, so I have
+        /// added small helper function which I can then reuse. Important!
+        /// Always make sure you are using CBC mode over ECB, since ECB has
+        /// serious security issues.
+        /// </remarks>
+        /// <returns>An Aes object.</returns>
+        private Aes CreateAes()
+        {
+            var aes = Aes.Create();
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
+            return aes;
+        }
     }
 }
