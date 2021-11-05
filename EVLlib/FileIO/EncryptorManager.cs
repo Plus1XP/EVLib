@@ -269,5 +269,33 @@ namespace EVLlib.FileIO
             aes.Padding = PaddingMode.PKCS7;
             return aes;
         }
+
+        /// <summary>
+        /// Encryption key used to encrypt the String.
+        /// (Note: The same key must be used for both encrypting / decrypting data)
+        /// </summary>
+        /// <remarks>
+        /// To make sure our password is usable as a key for AES we are currently
+        /// simply hashing it with MD5. That stretches shorter or longer password
+        /// into a key of exactly the size we need it to be. Even though the
+        /// entropy of our chosen password will not increase we can still
+        /// strengthen our resulting key against bruteforce and dictionary attacks.
+        /// Algorithms for this purpose belong to a category named password-based
+        /// key derivation functions.
+        /// </remarks>
+        /// <param name="password">Password used to encrypt / decrypt data.</param>
+        /// <param name="passwordSalt">Random bytes used to randomise the hash.</param>
+        /// <returns>Key derived from the password, salt, number of iterations, hash name.</returns>
+        private byte[] GetKey(string password, byte[] passwordSalt)
+        {
+            var keyBytes = StringEncoding.GetBytes(password);
+
+            using (var derivator = new Rfc2898DeriveBytes(
+                keyBytes, passwordSalt,
+                PasswordIterationCount, HashAlgorithmName.SHA256))
+            {
+                return derivator.GetBytes(PasswordByteSize);
+            }
+        }
     }
 }
