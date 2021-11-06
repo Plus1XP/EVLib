@@ -297,5 +297,17 @@ namespace EVLlib.FileIO
                 return derivator.GetBytes(PasswordByteSize);
             }
         }
+
+        /// <summary>
+        /// Generates a specific amount random bytes.
+        /// </summary>
+        /// <param name="numberOfBytes">number of bytes to be randomised.</param>
+        /// <returns>Random bytes.</returns>
+        private byte[] GenerateRandomBytes(int numberOfBytes)
+        {
+            var randomBytes = new byte[numberOfBytes];
+            Random.GetBytes(randomBytes);
+            return randomBytes;
+        }
     }
 }
