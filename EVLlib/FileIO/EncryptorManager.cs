@@ -309,5 +309,24 @@ namespace EVLlib.FileIO
             Random.GetBytes(randomBytes);
             return randomBytes;
         }
+
+        /// <summary>
+        /// Merge Byte Arrays.
+        /// </summary>
+        /// <param name="additionalCapacity">Number of Arrays as parameters.</param>
+        /// <param name="arrays">Byte Arrays to be merged./param>
+        /// <returns>single merged Byte Array.</returns>
+        private byte[] MergeArrays(int additionalCapacity = 0, params byte[][] arrays)
+        {
+            var merged = new byte[arrays.Sum(a => a.Length) + additionalCapacity];
+            var mergeIndex = 0;
+            for (int i = 0; i < arrays.GetLength(0); i++)
+            {
+                arrays[i].CopyTo(merged, mergeIndex);
+                mergeIndex += arrays[i].Length;
+            }
+
+            return merged;
+        }
     }
 }
