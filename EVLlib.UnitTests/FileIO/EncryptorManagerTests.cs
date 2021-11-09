@@ -17,5 +17,20 @@ namespace EVLlib.FileIO.Tests
         private const string fileName = "PleaseDelete.txt";
         private string testDirectory = $"{Directory.GetCurrentDirectory()}\\{folderName}";
         private string testFile = $"{Directory.GetCurrentDirectory()}\\{folderName}\\{fileName}";
+
+        [TestMethod]
+        public void FileEncryptionTest()
+        {
+            EncryptorManager encryptor = new EncryptorManager();
+
+            string expected = sampleText;
+
+            Directory.CreateDirectory(testDirectory);
+
+            encryptor.EncryptToFile(testFile, sampleText, encryptionKey);
+            string actual = encryptor.DecryptFromFile(testFile, encryptionKey);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
