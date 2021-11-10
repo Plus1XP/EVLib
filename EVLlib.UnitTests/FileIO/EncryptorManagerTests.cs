@@ -32,5 +32,19 @@ namespace EVLlib.FileIO.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void StringEncryptionTest()
+        {
+            EncryptorManager encryptor = new EncryptorManager();
+
+            string expected = sampleText;
+
+            string encryptedString = encryptor.EncryptToString(sampleText, encryptionKey);
+            string actual = encryptor.DecryptFromString(encryptedString, encryptionKey);
+
+            Assert.AreEqual(expected, actual);
+
+        }
     }
 }
