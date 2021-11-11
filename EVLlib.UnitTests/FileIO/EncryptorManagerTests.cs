@@ -46,5 +46,18 @@ namespace EVLlib.FileIO.Tests
             Assert.AreEqual(expected, actual);
 
         }
+
+        [TestMethod]
+        public void ByteArrayEncryptionTest()
+        {
+            EncryptorManager encryptor = new EncryptorManager();
+
+            string expected = sampleText;
+
+            byte[] encryptedBytes = encryptor.EncryptToByteArray(sampleText, encryptionKey);
+            string actual = encryptor.DecryptFromByteArray(encryptedBytes, encryptionKey);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
