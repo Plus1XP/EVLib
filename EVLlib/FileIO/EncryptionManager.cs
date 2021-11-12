@@ -6,6 +6,7 @@ using System.Text;
 
 namespace EVLlib.FileIO
 {
+    [Obsolete("This Class was depreciated 12 November, 2021. Use EncryptorManager instead.", false)]
     public class EncryptionManager
     {
         Aes aes;
