@@ -58,5 +58,79 @@ namespace EVLlib.Mail
             Server.Password = password;
             Server.EnableSsl = enableSsl;
         }
+
+        /// <summary>
+        /// Sends an email via the SMTP Server using specified Server Settings and Message Fields.
+        /// </summary>
+        /// <remarks>
+        /// If UseDefaultCredentials is set to true it will use the defaults,
+        /// otherwise it will first look in Credentials property and then in the web.config (default).
+        /// If none are set it will send the email anonymously.
+        /// If you set 'UseDefaultCredentials = false' you must do it BEFORE setting Credentials,
+        /// as the change nulls any existing credentials set
+        /// </remarks>
+        /// <returns>Delivery status as a String.</returns>
+        private string SendSMTP()
+        {
+            try
+            {
+                SmtpClient mailServer = new SmtpClient();
+
+                mailServer.Host = Server.Host;
+                mailServer.Port = Server.Port;
+                // must be set before NetworkCredentials
+                mailServer.UseDefaultCredentials = Server.UseDefaultCredentials;
+
+                if (Server.UseDefaultCredentials == false)
+                {
+                    mailServer.Credentials = new NetworkCredential(Server.Username, Server.Password);
+                }
+
+                mailServer.EnableSsl = Server.EnableSsl;
+
+                // add from,to mailaddresses
+                MailAddress from = new MailAddress(Field.SenderEmail, Field.SenderName);
+                MailAddress to = new MailAddress(Field.RecipientEmail, Field.RecipientName);
+                MailMessage email = new MailMessage(from, to);
+
+                // TODO Add option to use different reply to address.
+                // add ReplyTo
+                MailAddress replyto = new MailAddress(Field.SenderEmail);
+                email.ReplyToList.Add(replyto);
+
+                // set subject and encoding
+                email.Subject = Field.Subject;
+                email.SubjectEncoding = System.Text.Encoding.UTF8;
+
+                // add Attachment
+                if (Field.AttachmentPath != null)
+                {
+                    email.Attachments.Add(new Attachment(Field.AttachmentPath));
+                }
+
+                // set body-message and encoding
+                email.Body = Field.Body;
+                email.BodyEncoding = System.Text.Encoding.UTF8;
+
+                // text or html
+                email.IsBodyHtml = true;
+
+                // set Priority
+                email.Priority = MailPriority.Normal;
+
+                // send Mail
+                mailServer.Send(email);
+
+                return "Mail Sent!";
+            }
+            catch (SmtpException ex)
+            {
+                return "SmtpException has occured: " + ex.Message;
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
     }
 }
