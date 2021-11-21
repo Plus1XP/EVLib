@@ -60,6 +60,31 @@ namespace EVLlib.Mail
         }
 
         /// <summary>
+        /// Sends an email via SMTP.
+        /// </summary>
+        /// <param name="senderName">Display name of Sender.</param>
+        /// <param name="senderEmail">Email address of sender.</param>
+        /// <param name="recipientName">Display name of recipient.</param>
+        /// <param name="recipientEmail">Email address of recipient.</param>
+        /// <param name="subject">Email subject.</param>
+        /// <param name="body">Email message body.</param>
+        /// <param name="attachmentPath">Email attachment file path.</param>
+        /// <returns>Sent confirmation as String.</returns>
+        public string Send(string senderName, string senderEmail, string recipientName,
+            string recipientEmail, string subject, string body, string attachmentPath = null)
+        {
+            Field = new MessageField();
+            Field.SenderName = senderName;
+            Field.SenderEmail = senderEmail;
+            Field.RecipientName = recipientName;
+            Field.RecipientEmail = recipientEmail;
+            Field.Subject = subject;
+            Field.Body = body;
+            Field.AttachmentPath = attachmentPath;
+            return SendSMTP();
+        }
+
+        /// <summary>
         /// Sends an email via the SMTP Server using specified Server Settings and Message Fields.
         /// </summary>
         /// <remarks>
