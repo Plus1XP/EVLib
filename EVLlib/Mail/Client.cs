@@ -62,6 +62,15 @@ namespace EVLlib.Mail
         /// <summary>
         /// Sends an email via SMTP
         /// </summary>
+        /// <returns>Sent confirmation as String.</returns>
+        public String Send()
+        {
+            return SendSMTP();
+        }
+
+        /// <summary>
+        /// Sends an email via SMTP
+        /// </summary>
         /// <param name="messageField">Initializes a new instance of the MessageField class with the specified fields.</param>
         /// <returns>Sent confirmation as String.</returns>
         public string Send(MessageField messageField)
