@@ -29,4 +29,15 @@ namespace EVLlib.Mail.Tests
             Body = "Testing mail-flow"
         };
 
+        [TestMethod]
+        public void SendTestValues()
+        {
+            Client mail = new Client();
+            mail.Server = serverSettings;
+            mail.Field = messageField;
+            string actual = mail.Send();
+
+            string expected = "Mail Sent!";
+            Assert.AreEqual(actual, expected);
+        }
 }
