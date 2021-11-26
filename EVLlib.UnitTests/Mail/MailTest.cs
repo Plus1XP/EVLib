@@ -40,4 +40,14 @@ namespace EVLlib.Mail.Tests
             string expected = "Mail Sent!";
             Assert.AreEqual(actual, expected);
         }
+
+        [TestMethod]
+        public void SendTestObjects()
+        {
+            Client mail = new Client(serverSettings);
+            string actual = mail.Send(messageField);
+
+            string expected = "Mail Sent!";
+            Assert.AreEqual(actual, expected);
+        }
 }
