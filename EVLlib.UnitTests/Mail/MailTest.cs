@@ -50,4 +50,16 @@ namespace EVLlib.Mail.Tests
             string expected = "Mail Sent!";
             Assert.AreEqual(actual, expected);
         }
+
+        [TestMethod]
+        public void SendTestParameters()
+        {
+            Client mail = new Client("smtp.host.com", 587, "username@host.com", "StrongPassword1", true);
+            string actual = mail.Send("Sender", "sender@host.com", "Recipient", "recipient@host.com",
+                "Test Message", "Testing mail-flow");
+
+            string expected = "Mail Sent!";
+            Assert.AreEqual(actual, expected);
+        }
+    }
 }
