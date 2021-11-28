@@ -7,6 +7,7 @@ using System.Text;
 
 namespace EVLlib.Mail.Tests
 {
+    [Ignore]
     [TestClass]
     public class ClientTest
     {
