@@ -12,7 +12,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>D:\OneDrive\Development\NuGet\</OutputPath>
+    <OutputPath>..\..\..\NuGet\EVLlib</OutputPath>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
 </Project>
