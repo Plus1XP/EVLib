@@ -114,5 +114,31 @@ namespace EVLlib.FileIO
         {
             return File.ReadAllBytes(filePath);
         }
+
+
+        /// <summary>
+        /// Reads a specific line from a file on disk.
+        /// </summary>
+        //// <param name="filePath">Path to file.</param>
+        /// <param name="lineNumber">Line number to read.</param>
+        /// <returns>String containing text from specific line number.</returns>
+        private string ReadSpecificLine(string filePath, int lineNumber)
+        {
+            using (StreamReader file = new StreamReader(filePath))
+            {
+                string content = null;
+                for (int i = 1; i < lineNumber; i++)
+                {
+                    file.ReadLine();
+
+                    if (file.EndOfStream)
+                    {
+                        break;
+                    }
+                }
+                content = file.ReadLine();
+                return content;
+            }
+        }
     }
 }
