@@ -64,12 +64,32 @@ namespace EVLlib.FileIO
         }
 
         /// <summary>
-        /// Deletes file from the specified path.
+        /// Deletes file from the specified path and in case of error will wait and try again.
         /// </summary>
+        /// <remarks>
+        /// Retry pattern tries 3 times (NumberOfRetries) with a 1 second delay (DelayOnretry).
+        /// </remarks>
         /// <param name="filePath">Path to file.</param>
         public void DeleteFile(string filePath)
         {
-            File.Delete(filePath);
+            const int NumberOfRetries = 3;
+            const int DelayOnRetry = 1000;
+
+            for (int i = 1; i <= NumberOfRetries; ++i)
+            {
+                try
+                {
+                    File.Delete(filePath);
+                    // When done we can break loop
+                    break;
+                }
+                catch (IOException e) when (i <= NumberOfRetries)
+                {
+                    // You may check error code to filter some exceptions, not every error
+                    // can be recovered.
+                    Thread.Sleep(DelayOnRetry);
+                }
+            }
         }
 
         /// <summary>
