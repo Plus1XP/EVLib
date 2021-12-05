@@ -57,10 +57,13 @@ namespace EVLlib.FileIO
         /// <summary>
         /// Deletes folder from the specified path.
         /// </summary>
+        /// <remarks>
+        /// This operation is recursive and will delete all subdirectories and files.
+        /// </remarks>
         /// <param name="folderPath">Path to folder.</param>
         public void DeleteFolder(string folderPath)
         {
-            Directory.Delete(folderPath);
+            Directory.Delete(folderPath, true);
         }
 
         /// <summary>
