@@ -18,9 +18,10 @@ namespace EVLlib.FileIO.Tests
             32, 110, 111, 116, 104, 105, 110, 103, 32, 105, 109, 112, 111, 114, 116, 97, 110,
             116, 32, 105, 110, 115, 105, 100, 101, 32, 40, 58 };
 
-
-        string testDirectory = $"{Directory.GetCurrentDirectory()}\\{folderName}";
-        string testFile = $"{Directory.GetCurrentDirectory()}\\{folderName}\\{fileName}";
+        static string[] fullDirectoryPath = new string[] { Directory.GetCurrentDirectory(), folderName };
+        static string[] fullFilePath = new string[] { Directory.GetCurrentDirectory(), folderName, fileName };
+        string testDirectory = Path.Combine(fullDirectoryPath);
+        string testFile = Path.Combine(fullFilePath);
 
 
         [TestMethod]
