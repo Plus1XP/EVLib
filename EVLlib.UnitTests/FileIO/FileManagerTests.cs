@@ -225,6 +225,31 @@ namespace EVLlib.FileIO.Tests
 
             File.Delete(testFile);
             Directory.Delete(testDirectory);
+
+        [TestMethod]
+        public void ReadLineFromFileTest()
+        {
+            StringBuilder multilineString = new StringBuilder();
+            Random random = new Random();
+
+            int linesToWrite = random.Next(1, 100);
+
+            for (int i = 1; i <= linesToWrite; i++)
+            {
+                multilineString.AppendLine(i.ToString());
+            }
+
+            Directory.CreateDirectory(testDirectory);
+            File.WriteAllText(testFile, multilineString.ToString());
+
+            int lineToRead = random.Next(1, linesToWrite);
+
+            FileManager fileManager = new FileManager();
+
+            string actual = fileManager.ReadLineFromFile(testFile, lineToRead);
+            string expected = lineToRead.ToString();
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }
