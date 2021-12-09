@@ -144,7 +144,11 @@ namespace EVLlib.FileIO.Tests
         public void DeleteFileTest()
         {
             Directory.CreateDirectory(testDirectory);
-            File.Create(testFile);
+
+            using (var stream = File.Create(testFile))
+            {
+                stream.Close();
+            }
 
             FileManager fileManager = new FileManager();
             fileManager.DeleteFile(testFile);
