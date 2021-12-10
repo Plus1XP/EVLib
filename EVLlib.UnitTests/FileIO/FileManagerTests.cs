@@ -23,6 +23,11 @@ namespace EVLlib.FileIO.Tests
         string testDirectory = Path.Combine(fullDirectoryPath);
         string testFile = Path.Combine(fullFilePath);
 
+        public void CleanupDirectories()
+        {
+            File.Delete(testFile);
+            Directory.Delete(testDirectory);
+        }
 
         [TestMethod]
         public void FolderCreatedTests()
@@ -43,8 +48,8 @@ namespace EVLlib.FileIO.Tests
 
                 Assert.AreEqual(expected2, actual2);
             }
-            
-            Directory.Delete(testDirectory);
+
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -68,8 +73,7 @@ namespace EVLlib.FileIO.Tests
                 Assert.AreEqual(expected2, actual2);
             }
 
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -82,7 +86,7 @@ namespace EVLlib.FileIO.Tests
 
             Assert.IsTrue(Directory.Exists(expected));
 
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -97,8 +101,7 @@ namespace EVLlib.FileIO.Tests
 
             Assert.IsTrue(File.Exists(expected));
 
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -117,8 +120,7 @@ namespace EVLlib.FileIO.Tests
 
             Assert.AreEqual(actual, expected);
 
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -138,6 +140,11 @@ namespace EVLlib.FileIO.Tests
             isDirectoryCreated = Directory.Exists(testDirectory);
 
             Assert.IsFalse(isDirectoryCreated);
+
+            if (isDirectoryCreated)
+            {
+                CleanupDirectories();
+            }
         }
 
         [TestMethod]
@@ -157,8 +164,7 @@ namespace EVLlib.FileIO.Tests
 
             Assert.IsFalse(File.Exists(expected));
 
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -174,8 +180,7 @@ namespace EVLlib.FileIO.Tests
 
             Assert.AreEqual(expected, actual);
 
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -191,8 +196,7 @@ namespace EVLlib.FileIO.Tests
 
             CollectionAssert.AreEqual(expected, actual);
 
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -208,8 +212,7 @@ namespace EVLlib.FileIO.Tests
 
             Assert.AreEqual(expected, actual);
 
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -227,8 +230,8 @@ namespace EVLlib.FileIO.Tests
 
             Assert.AreEqual(expected, actual);
 
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            CleanupDirectories();
+        }
 
         [TestMethod]
         public void ReadLineFromFileTest()
@@ -254,6 +257,8 @@ namespace EVLlib.FileIO.Tests
             string expected = lineToRead.ToString();
 
             Assert.AreEqual(expected, actual);
+
+            CleanupDirectories();
         }
     }
 }
