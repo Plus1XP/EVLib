@@ -15,8 +15,10 @@ namespace EVLlib.FileIO.Tests
 
         private const string folderName = "PleaseDelete";
         private const string fileName = "PleaseDelete.txt";
-        private string testDirectory = $"{Directory.GetCurrentDirectory()}\\{folderName}";
-        private string testFile = $"{Directory.GetCurrentDirectory()}\\{folderName}\\{fileName}";
+        static string[] fullDirectoryPath = new string[] { Directory.GetCurrentDirectory(), folderName };
+        static string[] fullFilePath = new string[] { Directory.GetCurrentDirectory(), folderName, fileName };
+        string testDirectory = Path.Combine(fullDirectoryPath);
+        string testFile = Path.Combine(fullFilePath);
 
         [TestMethod]
         public void FileEncryptionTest()
