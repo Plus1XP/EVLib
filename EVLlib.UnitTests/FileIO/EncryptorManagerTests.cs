@@ -20,6 +20,12 @@ namespace EVLlib.FileIO.Tests
         string testDirectory = Path.Combine(fullDirectoryPath);
         string testFile = Path.Combine(fullFilePath);
 
+        private void CleanupDirectories()
+        {
+            File.Delete(testFile);
+            Directory.Delete(testDirectory);
+        }
+
         [TestMethod]
         public void FileEncryptionTest()
         {
@@ -33,6 +39,8 @@ namespace EVLlib.FileIO.Tests
             string actual = encryptor.DecryptFromFile(testFile, encryptionKey);
 
             Assert.AreEqual(expected, actual);
+
+            CleanupDirectories();
         }
 
         [TestMethod]
@@ -46,7 +54,6 @@ namespace EVLlib.FileIO.Tests
             string actual = encryptor.DecryptFromString(encryptedString, encryptionKey);
 
             Assert.AreEqual(expected, actual);
-
         }
 
         [TestMethod]
