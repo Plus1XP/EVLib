@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace EVLlib.FileIO
 {
@@ -57,19 +58,42 @@ namespace EVLlib.FileIO
         /// <summary>
         /// Deletes folder from the specified path.
         /// </summary>
+        /// <remarks>
+        /// This operation is recursive and will delete all subdirectories and files.
+        /// </remarks>
         /// <param name="folderPath">Path to folder.</param>
         public void DeleteFolder(string folderPath)
         {
-            Directory.Delete(folderPath);
+            Directory.Delete(folderPath, true);
         }
 
         /// <summary>
-        /// Deletes file from the specified path.
+        /// Deletes file from the specified path and in case of error will wait and try again.
         /// </summary>
+        /// <remarks>
+        /// Retry pattern tries 3 times (NumberOfRetries) with a 1 second delay (DelayOnretry).
+        /// </remarks>
         /// <param name="filePath">Path to file.</param>
         public void DeleteFile(string filePath)
         {
-            File.Delete(filePath);
+            const int NumberOfRetries = 3;
+            const int DelayOnRetry = 1000;
+
+            for (int i = 1; i <= NumberOfRetries; ++i)
+            {
+                try
+                {
+                    File.Delete(filePath);
+                    // When done we can break loop
+                    break;
+                }
+                catch (IOException e) when (i <= NumberOfRetries)
+                {
+                    // You may check error code to filter some exceptions, not every error
+                    // can be recovered.
+                    Thread.Sleep(DelayOnRetry);
+                }
+            }
         }
 
         /// <summary>
@@ -113,6 +137,42 @@ namespace EVLlib.FileIO
         public byte[] ReadBytesFromFile(string filePath)
         {
             return File.ReadAllBytes(filePath);
+        }
+
+        /// <summary>
+        /// Reads a specific line from a file on disk.
+        /// </summary>
+        /// <param name="filePath">Path to file.</param>
+        /// <param name="lineNumber">Line number to read.</param>
+        /// <returns>String containing text from specific line number.</returns>
+        public string ReadLineFromFile(string filePath, int lineNumber)
+        {
+            return ReadSpecificLine(filePath, lineNumber);
+        }
+
+        /// <summary>
+        /// Reads a specific line from a file on disk.
+        /// </summary>
+        //// <param name="filePath">Path to file.</param>
+        /// <param name="lineNumber">Line number to read.</param>
+        /// <returns>String containing text from specific line number.</returns>
+        private string ReadSpecificLine(string filePath, int lineNumber)
+        {
+            using (StreamReader file = new StreamReader(filePath))
+            {
+                string content = null;
+                for (int i = 1; i < lineNumber; i++)
+                {
+                    file.ReadLine();
+
+                    if (file.EndOfStream)
+                    {
+                        break;
+                    }
+                }
+                content = file.ReadLine();
+                return content;
+            }
         }
     }
 }
