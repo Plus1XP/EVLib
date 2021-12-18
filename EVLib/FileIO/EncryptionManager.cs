@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace EVLlib.FileIO
+namespace EVLib.FileIO
 {
     [Obsolete("This Class was depreciated 12 November, 2021. Use EncryptorManager instead.", false)]
     public class EncryptionManager

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EVLlib.Mail
+namespace EVLib.Mail
 {
     public class MessageField
     {

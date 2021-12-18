@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EVLlib.Mathamatics.Tests
+namespace EVLib.Mathamatics.Tests
 {
     [TestClass]
     public class CalculateTest

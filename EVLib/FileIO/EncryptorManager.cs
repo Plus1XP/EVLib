@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace EVLlib.FileIO
+namespace EVLib.FileIO
 {
     /// <summary>
     /// A Semmetric Encrytor using AES. 128 bits for the block and 256 bits for the key.

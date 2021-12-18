@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
-namespace EVLlib.Mathamatics
+namespace EVLib.Mathamatics
 {
     public class Calculate
     {

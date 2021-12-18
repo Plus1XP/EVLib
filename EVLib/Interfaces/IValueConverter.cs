@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace EVLlib.Interfaces
+namespace EVLib.Interfaces
 {
     public interface IValueConverter
     {

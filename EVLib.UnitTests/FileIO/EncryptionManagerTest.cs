@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace EVLlib.FileIO.Tests
+namespace EVLib.FileIO.Tests
 {
     [TestClass]
     public class EncryptionManagerTests

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace EVLlib.Mail.Tests
+namespace EVLib.Mail.Tests
 {
     [Ignore]
     [TestClass]

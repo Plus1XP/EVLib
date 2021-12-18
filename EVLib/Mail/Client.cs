@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 
-namespace EVLlib.Mail
+namespace EVLib.Mail
 {
     public class Client
     {

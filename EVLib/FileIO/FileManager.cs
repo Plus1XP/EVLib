@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace EVLlib.FileIO
+namespace EVLib.FileIO
 {
     public class FileManager
     {

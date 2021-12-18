@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EVLlib.Mathamatics
+namespace EVLib.Mathamatics
 {
     /// <summary>
     /// XOFT is an encryption algorithm using a key to mash it up with the cipher string. Its result is base64 encoded. 

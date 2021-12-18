@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EVLlib.FileIO
+namespace EVLib.FileIO
 {
     public class CalendarManager : FileManager
     {

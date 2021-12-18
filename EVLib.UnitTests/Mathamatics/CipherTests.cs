@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EVLlib.Mathamatics;
+using EVLib.Mathamatics;
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EVLlib.Mathamatics.Tests
+namespace EVLib.Mathamatics.Tests
 {
     [TestClass()]
     public class CipherTests

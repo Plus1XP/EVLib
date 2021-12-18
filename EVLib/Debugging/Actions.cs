@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace EVLlib.Debugging
+namespace EVLib.Debugging
 {
     public static class Actions
     {

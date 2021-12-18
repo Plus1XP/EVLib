@@ -1,4 +1,4 @@
-﻿namespace EVLlib.Enums
+﻿namespace EVLib.Enums
 {
     public enum Visibility : byte
     {
