@@ -1,0 +1,67 @@
+name: Publish NuGet
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: |
+          3.1.x
+          5.0.x
+    - name: Restore
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --configuration Release --no-build --verbosity normal
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build  EVLib/EVLib.csproj --output package
+    - name: Source  
+      run: dotnet nuget add source --username plus1xp --password ${{ secrets.GITHUB_TOKEN }}
+            --store-password-in-clear-text --name github "https://nuget.pkg.github.com/plus1xp/index.json"
+    - name: Push
+      run: dotnet nuget push package/*.nupkg --skip-duplicate --api-key ${{ github.token }} --source "github"
+    - name: Zip
+      run: zip -r source.zip . -x "EVLib/bin/*" "EVLib/obj/*" "EVLib.UnitTests/bin/*" "EVLib.UnitTests/obj/*" 
+            "package/*" ".git/*" ".github/*"
+    - name: Zip
+      run: zip -r nuget.zip ./package
+    - name: Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: r${{ github.run_number }}
+        release_name: Release Run ${{ github.run_number }}
+        draft: true
+        prerelease: false
+    #- name: Asset
+      #id: upload-release-asset-source
+      #uses: actions/upload-release-asset@v1
+      #env:
+        #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #with:
+        #upload_url: ${{ steps.create_release.outputs.upload_url }}
+        #asset_path: ./source.zip
+        #asset_name: source.zip
+        #asset_content_type: application/zip
+    - name: Asset
+      id: upload-release-asset-package
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./nuget.zip
+        asset_name: package.zip
+        asset_content_type: application/zip
