@@ -147,7 +147,7 @@ namespace EVLib.FileIO
         /// <returns>String containing text from specific line number.</returns>
         public string ReadLineFromFile(string filePath, int lineNumber)
         {
-            return ReadSpecificLine(filePath, lineNumber);
+            return this.ReadSpecificLine(filePath, lineNumber);
         }
 
         /// <summary>

@@ -47,8 +47,8 @@ namespace EVLib.FileIO
         /// <param name="password">Password used to encrypt / decrypt data.</param>
         public void EncryptToFile(string filePath, string stringToEncrypt, string password)
         {
-            byte[] encryptedByteArray = Encrypt(stringToEncrypt, password);
-            SaveToFile(filePath, encryptedByteArray);
+            byte[] encryptedByteArray = this.Encrypt(stringToEncrypt, password);
+            this.SaveToFile(filePath, encryptedByteArray);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace EVLib.FileIO
         /// <returns>AES Encrypted String in Base64.</returns>
         public string EncryptToString(string stringToEncrypt, string password)
         {
-            byte[] encryptedByteArray = Encrypt(stringToEncrypt, password);
+            byte[] encryptedByteArray = this.Encrypt(stringToEncrypt, password);
             return Convert.ToBase64String(encryptedByteArray);
         }
 
@@ -81,7 +81,7 @@ namespace EVLib.FileIO
         /// <returns>AES Encrypted String as Byte Array.</returns>
         public byte[] EncryptToByteArray(string stringToEncrypt, string password)
         {
-            return Encrypt(stringToEncrypt, password);
+            return this.Encrypt(stringToEncrypt, password);
         }
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace EVLib.FileIO
         /// <returns>Decrypted String.</returns>
         public string DecryptFromFile(string filePath, string password)
         {
-            byte[] encryptedByteArray = ReadBytesFromFile(filePath);
-            return Decrypt(encryptedByteArray, password);
+            byte[] encryptedByteArray = this.ReadBytesFromFile(filePath);
+            return this.Decrypt(encryptedByteArray, password);
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace EVLib.FileIO
         public string DecryptFromString(string stringToDecrypt, string password)
         {
             byte[] encryptedByteArray = Convert.FromBase64String(stringToDecrypt);
-            return Decrypt(encryptedByteArray, password);
+            return this.Decrypt(encryptedByteArray, password);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace EVLib.FileIO
         /// <returns>Decrypted String.</returns>
         public string DecryptFromByteArray(byte[] byteArrayToDecrypt, string password)
         {
-            return Decrypt(byteArrayToDecrypt, password);
+            return this.Decrypt(byteArrayToDecrypt, password);
         }
 
         /// <summary>
@@ -150,24 +150,24 @@ namespace EVLib.FileIO
         private byte[] Encrypt(string stringToEncrypt, string password)
         {
             // encrypt
-            var keySalt = GenerateRandomBytes(PasswordSaltByteSize);
-            var key = GetKey(password, keySalt);
-            var iv = GenerateRandomBytes(AesBlockByteSize);
+            var keySalt = this.GenerateRandomBytes(PasswordSaltByteSize);
+            var key = this.GetKey(password, keySalt);
+            var iv = this.GenerateRandomBytes(AesBlockByteSize);
 
             byte[] cipherText;
-            using (var aes = CreateAes())
+            using (var aes = this.CreateAes())
             using (var encryptor = aes.CreateEncryptor(key, iv))
             {
-                var plainText = StringEncoding.GetBytes(stringToEncrypt);
+                var plainText = this.StringEncoding.GetBytes(stringToEncrypt);
                 cipherText = encryptor
                     .TransformFinalBlock(plainText, 0, plainText.Length);
             }
 
             // sign
-            var authKeySalt = GenerateRandomBytes(PasswordSaltByteSize);
-            var authKey = GetKey(password, authKeySalt);
+            var authKeySalt = this.GenerateRandomBytes(PasswordSaltByteSize);
+            var authKey = this.GetKey(password, authKeySalt);
 
-            var result = MergeArrays(
+            var result = this.MergeArrays(
                 additionalCapacity: SignatureByteSize,
                 authKeySalt, keySalt, iv, cipherText);
 
@@ -215,8 +215,8 @@ namespace EVLib.FileIO
             var cipherTextLength =
                 byteArrayToDecrypt.Length - cipherTextIndex - signatureTag.Length;
 
-            var authKey = GetKey(password, authKeySalt);
-            var key = GetKey(password, keySalt);
+            var authKey = this.GetKey(password, authKeySalt);
+            var key = this.GetKey(password, keySalt);
 
             // verify signature
             using (var hmac = new HMACSHA256(authKey))
@@ -239,13 +239,13 @@ namespace EVLib.FileIO
             }
 
             // decrypt
-            using (var aes = CreateAes())
+            using (var aes = this.CreateAes())
             {
                 using (var encryptor = aes.CreateDecryptor(key, iv))
                 {
                     var decryptedBytes = encryptor
                         .TransformFinalBlock(byteArrayToDecrypt, cipherTextIndex, cipherTextLength);
-                    return StringEncoding.GetString(decryptedBytes);
+                    return this.StringEncoding.GetString(decryptedBytes);
                 }
             }
         }
@@ -288,7 +288,7 @@ namespace EVLib.FileIO
         /// <returns>Key derived from the password, salt, number of iterations, hash name.</returns>
         private byte[] GetKey(string password, byte[] passwordSalt)
         {
-            var keyBytes = StringEncoding.GetBytes(password);
+            var keyBytes = this.StringEncoding.GetBytes(password);
 
             using (var derivator = new Rfc2898DeriveBytes(
                 keyBytes, passwordSalt,
@@ -306,7 +306,7 @@ namespace EVLib.FileIO
         private byte[] GenerateRandomBytes(int numberOfBytes)
         {
             var randomBytes = new byte[numberOfBytes];
-            Random.GetBytes(randomBytes);
+            this.Random.GetBytes(randomBytes);
             return randomBytes;
         }
 

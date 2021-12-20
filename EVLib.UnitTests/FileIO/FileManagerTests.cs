@@ -25,8 +25,8 @@ namespace EVLib.FileIO.Tests
 
         public void CleanupDirectories()
         {
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            File.Delete(this.testFile);
+            Directory.Delete(this.testDirectory);
         }
 
         [TestMethod]
@@ -34,22 +34,22 @@ namespace EVLib.FileIO.Tests
         {
             FileManager fileManager = new FileManager();
 
-            bool expected = Directory.Exists(testDirectory);
-            bool actual = fileManager.IsFolderCreated(testDirectory);
+            bool expected = Directory.Exists(this.testDirectory);
+            bool actual = fileManager.IsFolderCreated(this.testDirectory);
 
             Assert.AreEqual(expected, actual);
 
             if (!expected)
             {
-                Directory.CreateDirectory(testDirectory);
+                Directory.CreateDirectory(this.testDirectory);
 
-                bool expected2 = Directory.Exists(testDirectory);
-                bool actual2 = fileManager.IsFolderCreated(testDirectory);
+                bool expected2 = Directory.Exists(this.testDirectory);
+                bool actual2 = fileManager.IsFolderCreated(this.testDirectory);
 
                 Assert.AreEqual(expected2, actual2);
             }
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
@@ -57,70 +57,70 @@ namespace EVLib.FileIO.Tests
         {
             FileManager fileManager = new FileManager();
 
-            bool expected = File.Exists(testFile);
-            bool actual = fileManager.IsFileCreated(testFile);
+            bool expected = File.Exists(this.testFile);
+            bool actual = fileManager.IsFileCreated(this.testFile);
 
             Assert.AreEqual(expected, actual);
 
             if (!expected)
             {
-                Directory.CreateDirectory(testDirectory);
-                File.Create(testFile).Close();
+                Directory.CreateDirectory(this.testDirectory);
+                File.Create(this.testFile).Close();
 
-                bool expected2 = File.Exists(testFile);
-                bool actual2 = fileManager.IsFileCreated(testFile);
+                bool expected2 = File.Exists(this.testFile);
+                bool actual2 = fileManager.IsFileCreated(this.testFile);
 
                 Assert.AreEqual(expected2, actual2);
             }
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
         public void CreateFolderTest()
         {
             FileManager fileManager = new FileManager();
-            fileManager.CreateFolder(testDirectory);
+            fileManager.CreateFolder(this.testDirectory);
 
-            string expected = testDirectory;
+            string expected = this.testDirectory;
 
             Assert.IsTrue(Directory.Exists(expected));
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
         public void CreateFileTest()
         {
-            Directory.CreateDirectory(testDirectory);
+            Directory.CreateDirectory(this.testDirectory);
 
             FileManager fileManager = new FileManager();
-            fileManager.CreateFile(testFile);
+            fileManager.CreateFile(this.testFile);
 
-            string expected = testFile;
+            string expected = this.testFile;
 
             Assert.IsTrue(File.Exists(expected));
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
         public void ClearFileTest()
         {
-            Directory.CreateDirectory(testDirectory);
-            File.WriteAllText(testFile, sampleString);
+            Directory.CreateDirectory(this.testDirectory);
+            File.WriteAllText(this.testFile, sampleString);
 
-            Assert.AreEqual(File.ReadAllText(testFile), sampleString);
+            Assert.AreEqual(File.ReadAllText(this.testFile), sampleString);
 
             FileManager fileManager = new FileManager();
-            fileManager.ClearFile(testFile);
+            fileManager.ClearFile(this.testFile);
 
-            string actual = File.ReadAllText(testFile);
+            string actual = File.ReadAllText(this.testFile);
             string expected = string.Empty;
 
             Assert.AreEqual(actual, expected);
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
@@ -128,109 +128,109 @@ namespace EVLib.FileIO.Tests
         {
             FileManager fileManager = new FileManager();
 
-            bool isDirectoryCreated = Directory.Exists(testDirectory);
+            bool isDirectoryCreated = Directory.Exists(this.testDirectory);
 
             if (!isDirectoryCreated)
             {
-                Directory.CreateDirectory(testDirectory);
+                Directory.CreateDirectory(this.testDirectory);
             }
 
-            fileManager.DeleteFolder(testDirectory);
+            fileManager.DeleteFolder(this.testDirectory);
 
-            isDirectoryCreated = Directory.Exists(testDirectory);
+            isDirectoryCreated = Directory.Exists(this.testDirectory);
 
             Assert.IsFalse(isDirectoryCreated);
 
             if (isDirectoryCreated)
             {
-                CleanupDirectories();
+                this.CleanupDirectories();
             }
         }
 
         [TestMethod]
         public void DeleteFileTest()
         {
-            Directory.CreateDirectory(testDirectory);
+            Directory.CreateDirectory(this.testDirectory);
 
-            using (var stream = File.Create(testFile))
+            using (var stream = File.Create(this.testFile))
             {
                 stream.Close();
             }
 
             FileManager fileManager = new FileManager();
-            fileManager.DeleteFile(testFile);
+            fileManager.DeleteFile(this.testFile);
 
-            string expected = testFile;
+            string expected = this.testFile;
 
             Assert.IsFalse(File.Exists(expected));
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
         public void SaveStringToFileTest()
         {
-            Directory.CreateDirectory(testDirectory);
+            Directory.CreateDirectory(this.testDirectory);
 
             FileManager fileManager = new FileManager();
-            fileManager.SaveToFile(testFile, sampleString);
+            fileManager.SaveToFile(this.testFile, sampleString);
 
             string expected = sampleString;
-            string actual = File.ReadAllText(testFile);
+            string actual = File.ReadAllText(this.testFile);
 
             Assert.AreEqual(expected, actual);
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
         public void SaveBytesToFileTest()
         {
-            Directory.CreateDirectory(testDirectory);
+            Directory.CreateDirectory(this.testDirectory);
 
             FileManager fileManager = new FileManager();
-            fileManager.SaveToFile(testFile, sampleBytes);
+            fileManager.SaveToFile(this.testFile, this.sampleBytes);
 
-            byte[] actual = File.ReadAllBytes(testFile);
-            byte[] expected = sampleBytes;
+            byte[] actual = File.ReadAllBytes(this.testFile);
+            byte[] expected = this.sampleBytes;
 
             CollectionAssert.AreEqual(expected, actual);
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
         public void ReadStringFromFileTest()
         {
-            Directory.CreateDirectory(testDirectory);
-            File.WriteAllText(testFile, sampleString);
+            Directory.CreateDirectory(this.testDirectory);
+            File.WriteAllText(this.testFile, sampleString);
 
             FileManager fileManager = new FileManager();
 
-            string actual = fileManager.ReadStringFromFile(testFile);
+            string actual = fileManager.ReadStringFromFile(this.testFile);
             string expected = sampleString;
 
             Assert.AreEqual(expected, actual);
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
         public void ReadBytesFromFileTest()
         {
-            Directory.CreateDirectory(testDirectory);
-            File.WriteAllBytes(testFile, sampleBytes);
+            Directory.CreateDirectory(this.testDirectory);
+            File.WriteAllBytes(this.testFile, this.sampleBytes);
 
             FileManager fileManager = new FileManager();
 
-            byte[] byteArray = fileManager.ReadBytesFromFile(testFile);
+            byte[] byteArray = fileManager.ReadBytesFromFile(this.testFile);
 
             string actual = Encoding.UTF8.GetString(byteArray);
             string expected = sampleString;
 
             Assert.AreEqual(expected, actual);
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
@@ -246,19 +246,19 @@ namespace EVLib.FileIO.Tests
                 multilineString.AppendLine(i.ToString());
             }
 
-            Directory.CreateDirectory(testDirectory);
-            File.WriteAllText(testFile, multilineString.ToString());
+            Directory.CreateDirectory(this.testDirectory);
+            File.WriteAllText(this.testFile, multilineString.ToString());
 
             int lineToRead = random.Next(1, linesToWrite);
 
             FileManager fileManager = new FileManager();
 
-            string actual = fileManager.ReadLineFromFile(testFile, lineToRead);
+            string actual = fileManager.ReadLineFromFile(this.testFile, lineToRead);
             string expected = lineToRead.ToString();
 
             Assert.AreEqual(expected, actual);
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
     }
 }

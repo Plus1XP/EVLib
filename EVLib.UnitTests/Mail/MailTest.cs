@@ -34,8 +34,8 @@ namespace EVLib.Mail.Tests
         public void SendTestValues()
         {
             Client mail = new Client();
-            mail.Server = serverSettings;
-            mail.Field = messageField;
+            mail.Server = this.serverSettings;
+            mail.Field = this.messageField;
             string actual = mail.Send();
 
             string expected = "Mail Sent!";
@@ -45,8 +45,8 @@ namespace EVLib.Mail.Tests
         [TestMethod]
         public void SendTestObjects()
         {
-            Client mail = new Client(serverSettings);
-            string actual = mail.Send(messageField);
+            Client mail = new Client(this.serverSettings);
+            string actual = mail.Send(this.messageField);
 
             string expected = "Mail Sent!";
             Assert.AreEqual(actual, expected);

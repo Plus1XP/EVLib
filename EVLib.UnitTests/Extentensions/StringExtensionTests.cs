@@ -21,7 +21,7 @@ namespace EVLlib.Extentensions.Tests
         {
             string expected = "for testing purposes. ";
 
-            string results = normalTestString.Between("string ", "Please");
+            string results = this.normalTestString.Between("string ", "Please");
 
             Assert.AreEqual(expected, results);
         }
@@ -31,7 +31,7 @@ namespace EVLlib.Extentensions.Tests
         {
             string expected = "Hello! i am a simple string";
 
-            string results = normalTestString.Before(" for");
+            string results = this.normalTestString.Before(" for");
 
             Assert.AreEqual(expected, results);
         }
@@ -41,7 +41,7 @@ namespace EVLlib.Extentensions.Tests
         {
             string expected = "Please be gentle!";
 
-            string results = normalTestString.After("purposes. ");
+            string results = this.normalTestString.After("purposes. ");
 
             Assert.AreEqual(expected, results);
         }
@@ -51,7 +51,7 @@ namespace EVLlib.Extentensions.Tests
         {
             string expected = "! i am a string for testing purposes. be gentle!";
 
-            string results = normalTestString.RemoveWords(new string[] { "Hello", "simple", "Please" });
+            string results = this.normalTestString.RemoveWords(new string[] { "Hello", "simple", "Please" });
 
             Assert.AreEqual(expected, results);
         }
@@ -65,7 +65,7 @@ namespace EVLlib.Extentensions.Tests
             string expected = "H3llo! i am a simpl3 string for t3sting purpos3s. " +
                                 "Pl3as3 b3 g3ntl3!";
 
-            string results = normalTestString.ReplaceLetters(find, replace);
+            string results = this.normalTestString.ReplaceLetters(find, replace);
 
             Assert.AreEqual(expected, results);
         }
@@ -76,7 +76,7 @@ namespace EVLlib.Extentensions.Tests
             string expected = " Hello! i am a simple string with far too many " +
                 "spaces... Please Help! ";
 
-            string results = multipleSpacedTestString.ReduceWhitespaces();
+            string results = this.multipleSpacedTestString.ReduceWhitespaces();
 
             Assert.AreEqual(expected, results);
         }

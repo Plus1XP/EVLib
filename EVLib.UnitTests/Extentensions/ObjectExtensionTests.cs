@@ -14,8 +14,8 @@ namespace EVLlib.Extentensions.Tests
 
         public TestObject(string testRef, int testVal)
         {
-            TestRef = testRef;
-            TestVal = testVal;
+            this.TestRef = testRef;
+            this.TestVal = testVal;
         }
 
         public TestObject()

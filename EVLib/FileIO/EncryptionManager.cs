@@ -18,7 +18,7 @@ namespace EVLib.FileIO
         /// </summary>
         public EncryptionManager()
         {
-            aes = Aes.Create();
+            this.aes = Aes.Create();
         }
 
         /// <summary>
@@ -29,9 +29,9 @@ namespace EVLib.FileIO
         /// <param name="keyPhrase">Key to encrypt the data stream.</param>
         public void EncryptStringToFile(string filePath, string dataToEncrypt, string keyPhrase)
         {
-            SetEncryptionKey(keyPhrase);
-            SetAesKey();
-            EncryptStream(filePath, dataToEncrypt);
+            this.SetEncryptionKey(keyPhrase);
+            this.SetAesKey();
+            this.EncryptStream(filePath, dataToEncrypt);
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace EVLib.FileIO
         /// <returns>Decrypted String.</returns>
         public string DecryptStringFromFile(string filePath, string keyPhrase)
         {
-            SetEncryptionKey(keyPhrase);
-            GetAesKey();
-            return DecryptStream(filePath);
+            this.SetEncryptionKey(keyPhrase);
+            this.GetAesKey();
+            return this.DecryptStream(filePath);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace EVLib.FileIO
         /// <param name="keyPhrase">Key to decrypt the data stream.</param>
         private void SetEncryptionKey(string keyPhrase)
         {
-            key = Encoding.ASCII.GetBytes(keyPhrase);
+            this.key = Encoding.ASCII.GetBytes(keyPhrase);
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace EVLib.FileIO
         /// </remarks>
         private void SetAesKey()
         {
-            aes.Key = this.key;
-            iv = aes.IV;
+            this.aes.Key = this.key;
+            this.iv = this.aes.IV;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace EVLib.FileIO
         /// </summary>
         private void GetAesKey()
         {
-            iv = new byte[aes.IV.Length];
+            this.iv = new byte[this.aes.IV.Length];
         }
 
         /// <summary>
@@ -92,11 +92,11 @@ namespace EVLib.FileIO
 
             //Stores IV at the beginning of the file.
             //This information will be used for decryption.
-            dataStream.Write(iv, 0, iv.Length);
+            dataStream.Write(this.iv, 0, this.iv.Length);
 
             //Create a CryptoStream, pass it the FileStream, and encrypt
             //it with the Aes class. 
-            CryptoStream cryptStream = new CryptoStream(dataStream, aes.CreateEncryptor(), CryptoStreamMode.Write);
+            CryptoStream cryptStream = new CryptoStream(dataStream, this.aes.CreateEncryptor(), CryptoStreamMode.Write);
 
             //Create a StreamWriter for easy writing to the file stream.  
             StreamWriter streamWriter = new StreamWriter(cryptStream);
@@ -122,11 +122,11 @@ namespace EVLib.FileIO
             FileStream dataStream = new FileStream(filePath, FileMode.Open);
 
             //Reads IV value from beginning of the file.
-            dataStream.Read(iv, 0, iv.Length);
+            dataStream.Read(this.iv, 0, this.iv.Length);
 
             //Create a CryptoStream, pass it the file stream, and decrypt
             //it with the Aes class using the key and IV.
-            CryptoStream cryptStream = new CryptoStream(dataStream, aes.CreateDecryptor(key, iv), CryptoStreamMode.Read);
+            CryptoStream cryptStream = new CryptoStream(dataStream, this.aes.CreateDecryptor(this.key, this.iv), CryptoStreamMode.Read);
 
             //Read the stream.
             StreamReader streamReader = new StreamReader(cryptStream);
