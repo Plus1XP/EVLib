@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace EVLib.FileIO
 {
-    class XMLManager : FileManager
+    public class XMLManager : FileManager
     {
         public XMLManager()
         {

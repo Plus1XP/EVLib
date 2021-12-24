@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EVLib.ConsoleTools
 {
-    class TextUI
+    public class TextUI
     {
         /// <summary>
         /// Reads a string (letters) from the console using Console.ReadLine.

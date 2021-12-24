@@ -7,7 +7,7 @@ using System.Text;
 
 namespace EVLib.ConsoleTools
 {
-    class TextHeader : TextUI
+    public class TextHeader : TextUI
     {
         private string title;
         private string version;
