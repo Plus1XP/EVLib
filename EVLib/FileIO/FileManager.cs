@@ -11,11 +11,11 @@ namespace EVLib.FileIO
         /// <summary>
         /// Checks if folder exists.
         /// </summary>
-        /// <param name="filePath">The file to write to.</param>
+        /// <param name="folderPath">Path to folder.</param>
         /// <returns>Boolean true if folder exists, false if folder does not exist.</returns>
-        public bool IsFolderCreated(string filePath)
+        public bool IsFolderCreated(string folderPath)
         {
-            return Directory.Exists(filePath);
+            return Directory.Exists(folderPath);
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace EVLib.FileIO
         /// Reads bytes from file on disk.
         /// </summary>
         /// <param name="filePath">Path to file.</param>
-        /// <returns>String containing all text from file.</returns>
+        /// <returns>Byte Array containing all text from file.</returns>
         public byte[] ReadBytesFromFile(string filePath)
         {
             return File.ReadAllBytes(filePath);
