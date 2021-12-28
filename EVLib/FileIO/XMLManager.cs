@@ -15,15 +15,15 @@ namespace EVLib.FileIO
         /// <summary>
         /// Gets boolean value from attribute in XML node.
         /// </summary>
-        /// <param name="xmlFileLoaction">Path to XML file.</param>
+        /// <param name="xmlFileLocation">Path to XML file.</param>
         /// <param name="nodePath">XML node path.</param>
         /// <param name="nodeName">XML node name.</param>
         /// <param name="nodeValue">XML node value.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <returns>XML attribute value as boolean.</returns>
-        public bool GetNodeAttributeValueAsBool(string xmlFileLoaction, string nodePath, string nodeName, string nodeValue, string attributeName)
+        public bool GetNodeAttributeValueAsBool(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName)
         {
-            XmlNodeList nodeList = this.LoadNodeList(this.LoadXmlDocument(xmlFileLoaction), nodePath);
+            XmlNodeList nodeList = this.LoadNodeList(this.LoadXmlDocument(xmlFileLocation), nodePath);
             XmlAttribute elementAttribute = this.GetAttributeFromNodeList(nodeList, nodeName, nodeValue, attributeName);
 
             return this.GetAttributeValueAsBool(elementAttribute);
@@ -32,15 +32,15 @@ namespace EVLib.FileIO
         /// <summary>
         /// Gets Integer value from attribute in XML node.
         /// </summary>
-        /// <param name="xmlFileLoaction">Path to XML file.</param>
+        /// <param name="xmlFileLocation">Path to XML file.</param>
         /// <param name="nodePath">XML node path.</param>
         /// <param name="nodeName">XML node name.</param>
         /// <param name="nodeValue">XML node value.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <returns>XML attribute value as integer.</returns>
-        public int GetNodeAttributeValueAsInt(string xmlFileLoaction, string nodePath, string nodeName, string nodeValue, string attributeName)
+        public int GetNodeAttributeValueAsInt(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName)
         {
-            XmlNodeList nodeList = this.LoadNodeList(this.LoadXmlDocument(xmlFileLoaction), nodePath);
+            XmlNodeList nodeList = this.LoadNodeList(this.LoadXmlDocument(xmlFileLocation), nodePath);
             XmlAttribute elementAttribute = this.GetAttributeFromNodeList(nodeList, nodeName, nodeValue, attributeName);
 
             return this.GetAttributeValueAsInt(elementAttribute);
@@ -85,12 +85,12 @@ namespace EVLib.FileIO
         /// <summary>
         /// Loads XML document from file.
         /// </summary>
-        /// <param name="xmlFileLoaction">Path to XML file.</param>
+        /// <param name="xmlFileLocation">Path to XML file.</param>
         /// <returns>XML Document.</returns>
-        public XmlDocument LoadXmlDocument(string xmlFileLoaction)
+        public XmlDocument LoadXmlDocument(string xmlFileLocation)
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(this.ReadStringFromFile(xmlFileLoaction));
+            xmlDoc.LoadXml(this.ReadStringFromFile(xmlFileLocation));
 
             return xmlDoc;
         }
@@ -99,7 +99,7 @@ namespace EVLib.FileIO
         /// Loads XML node list from XML document.
         /// </summary>
         /// <param name="xmlDoc">XML Document to load.</param>
-        /// <param name="nodePath">Path to XML file.</param>
+        /// <param name="nodePath">XML node path.</param>
         /// <returns>XML node list.</returns>
         public XmlNodeList LoadNodeList(XmlDocument xmlDoc, string nodePath)
         {
@@ -113,10 +113,10 @@ namespace EVLib.FileIO
         /// Saves XML document to file.
         /// </summary>
         /// <param name="xmlDoc">XML document to save.</param>
-        /// <param name="xmlFileLoaction">Path to XML file.</param>
-        public void SaveXmlDocument(XmlDocument xmlDoc, string xmlFileLoaction)
+        /// <param name="xmlFileLocation">Path to XML file.</param>
+        public void SaveXmlDocument(XmlDocument xmlDoc, string xmlFileLocation)
         {
-            xmlDoc.Save(xmlFileLoaction);
+            xmlDoc.Save(xmlFileLocation);
         }
 
         /// <summary>
