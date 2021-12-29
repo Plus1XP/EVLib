@@ -17,7 +17,7 @@ namespace EVLib.Mail
         }
 
         /// <summary>
-        ///  Initializes client for sending emails via STMP.
+        /// Initializes client for sending emails via STMP.
         /// </summary>
         /// <param name="serverSettings">Initializes a new instance of the Server Settings class with the specified settings.</param>
         public Client(ServerSettings serverSettings)
@@ -26,8 +26,12 @@ namespace EVLib.Mail
         }
 
         /// <summary>
-        ///  Initializes client for sending emails via STMP.
+        /// Initializes client for sending emails via STMP.
         /// </summary>
+        /// <remarks>
+        /// This overload sets "UseDefaultCredentials" to true.
+        /// This will use the credentials of the current logged in user.
+        /// </remarks>
         /// <param name="host">Email servers host address.</param>
         /// <param name="port">Email servers port.</param>
         /// <param name="enableSsl">Specifies whether the email server requires SSL.</param>
@@ -41,7 +45,7 @@ namespace EVLib.Mail
         }
 
         /// <summary>
-        ///  Initializes client for sending emails via STMP.
+        /// Initializes client for sending emails via STMP.
         /// </summary>
         /// <param name="host">Email servers host address.</param>
         /// <param name="port">Email servers port.</param>
@@ -62,8 +66,11 @@ namespace EVLib.Mail
         /// <summary>
         /// Sends an email via SMTP
         /// </summary>
+        /// <remarks>
+        /// ServerSettings and MessageField must be set to the public fields.
+        /// </remarks>
         /// <returns>Sent confirmation as String.</returns>
-        public String Send()
+        public string Send()
         {
             return this.SendSMTP();
         }
@@ -71,6 +78,9 @@ namespace EVLib.Mail
         /// <summary>
         /// Sends an email via SMTP
         /// </summary>
+        /// <remarks>
+        /// ServerSettings must be passed into the constructor.
+        /// </remarks>
         /// <param name="messageField">Initializes a new instance of the MessageField class with the specified fields.</param>
         /// <returns>Sent confirmation as String.</returns>
         public string Send(MessageField messageField)
