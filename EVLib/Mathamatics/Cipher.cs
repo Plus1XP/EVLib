@@ -21,7 +21,7 @@ namespace EVLib.Mathamatics
         private readonly string _b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk.mnopqrstuvwxyz-123456789+/=";
 
         /// <summary>
-        /// A practical implementation of the XOR encryption technology in C# which is extended from the Vernam cipher 
+        /// A practical implementation of the XOR encryption technology in C# which is extended from the Vernam cipher.
         /// </summary>
         /// <remarks> 
         /// The longer the key phrase, the longer it will take to crack. However, this also makes it more easy it is to decode.
@@ -29,7 +29,7 @@ namespace EVLib.Mathamatics
         /// </remarks>
         /// <param name="data">Data to be encoded.</param>
         /// <param name="key">Key used to perform cipher.</param>
-        /// <returns>base64 encoded cipher</returns>
+        /// <returns>base64 encoded cipher.</returns>
         public string Encode(string data, string key)
         {
             int keypos = 0;
@@ -63,7 +63,7 @@ namespace EVLib.Mathamatics
         }
 
         /// <summary>
-        /// A practical implementation of the XOR encryption technology in C# which is extended from the Vernam cipher 
+        /// A practical implementation of the XOR encryption technology in C# which is extended from the Vernam cipher.
         /// </summary>
         /// <remarks> 
         /// The longer the key phrase, the longer it will take to crack. However, this also makes it more easy it is to decode.
@@ -71,7 +71,7 @@ namespace EVLib.Mathamatics
         /// </remarks>
         /// <param name="data">Data to be decoded.</param>
         /// <param name="key">Key used to perform cipher.</param>
-        /// <returns>Decoded cipher</returns>
+        /// <returns>Decoded cipher.</returns>
         public string Decode(string data, string key)
         {
             int m = 0;
@@ -115,7 +115,7 @@ namespace EVLib.Mathamatics
         /// <summary>
         /// Finds the index of a Character in the base64 alphabet.
         /// </summary>
-        /// <param name="n">base64 character</param>
+        /// <param name="n">base64 character.</param>
         /// <returns>Characters position in the base64 alphabet.</returns>
         private int GetNFromB64(char n)
         {
