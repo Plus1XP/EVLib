@@ -42,6 +42,10 @@ namespace EVLib.Mail
         /// <summary>
         /// Provides the properties required to send an email.
         /// </summary>
+        /// <remarks>
+        /// This overload sets "UseDefaultCredentials" to true.
+        /// This will use the credentials of the current logged in user.
+        /// </remarks>
         /// <param name="host">Email servers host address.</param>
         /// <param name="port">Email servers port.</param>
         /// <param name="enableSsl">Specifies whether the email server requires SSL.</param>
