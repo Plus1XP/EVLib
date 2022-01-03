@@ -52,6 +52,9 @@ namespace EVLib.Mathamatics
             return average;
         }
 
+        /// <TODO>
+        /// NOT WORKING CORRECTLY!
+        /// </TODO>
         /// <summary>
         /// Create truely random numbers using an instance of an encryption class (RNGCryptoServiceProvider).
         /// </summary>
