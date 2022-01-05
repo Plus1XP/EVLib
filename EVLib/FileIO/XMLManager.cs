@@ -232,7 +232,7 @@ namespace EVLib.FileIO
         /// <param name="node">XML node.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <returns>XML attribute value as boolean.</returns>
-        public bool GetNodeAttributeValueAsBool(XmlNode node, string attributeName)
+        private bool GetNodeAttributeValueAsBool(XmlNode node, string attributeName)
         {
             return Convert.ToBoolean(this.GetNodeAttribute(node, attributeName).Value);
         }
@@ -243,7 +243,7 @@ namespace EVLib.FileIO
         /// <param name="node">XML node.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <returns>XML attribute.</returns>
-        public XmlAttribute GetNodeAttribute(XmlNode node, string attributeName)
+        private XmlAttribute GetNodeAttribute(XmlNode node, string attributeName)
         {
             return node.Attributes?[attributeName];
         }
@@ -276,7 +276,7 @@ namespace EVLib.FileIO
         /// <param name="node">XML node.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <param name="attributeValue">boolean value to set XML attribute node.</param>
-        public void SetNodeAttributeFromBool(XmlNode node, string attributeName, bool attributeValue)
+        private void SetNodeAttributeFromBool(XmlNode node, string attributeName, bool attributeValue)
         {
             this.SetNodeAttribute(node, attributeName, Convert.ToString(attributeValue));
         }
