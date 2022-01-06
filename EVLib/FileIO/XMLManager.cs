@@ -178,12 +178,12 @@ namespace EVLib.FileIO
         /// Gets attribute integer value from XML attribute.
         /// </summary>
         /// <param name="attribute">XML attribute.</param>
-        /// <returns>XML attribute value as integer.</returns>
+        /// <returns>XML attribute value as integer (0 if attribute is null).</returns>
         public int GetAttributeValueAsInt(XmlAttribute attribute)
         {
             if (attribute == null)
             {
-                return 15;
+                return 0;
             }
 
             return Convert.ToInt32(attribute.Value);
