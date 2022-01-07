@@ -190,15 +190,15 @@ namespace EVLib.FileIO
         }
 
         /// <summary>
-        /// Gets attribute boolean vlaue from XML attribute.
+        /// Gets attribute boolean value from XML attribute.
         /// </summary>
         /// <param name="attribute">XML attribute.</param>
-        /// <returns>XML attribute value as boolean.</returns>
+        /// <returns>XML attribute value as boolean (false if attribute is null).</returns>
         public bool GetAttributeValueAsBool(XmlAttribute attribute)
         {
             if (attribute == null)
             {
-                return true;
+                return false;
             }
 
             return Convert.ToBoolean(attribute.Value);
