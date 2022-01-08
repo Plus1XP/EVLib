@@ -85,6 +85,6 @@ namespace EVLib.Mathamatics
             double randomValueInRange = Math.Floor(multiplier * range);
 
             return (int)(minimumValue + randomValueInRange);
-        }        
+        }
     }
 }

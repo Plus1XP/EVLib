@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVLib.Extensions
+﻿namespace EVLib.Extensions
 {
     public static class ObjectExtension
     {

@@ -1,9 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EVLib.Mathamatics;
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EVLib.Mathamatics.Tests
 {

@@ -19,7 +19,7 @@ namespace EVLib.FileIO
     /// That might seem strange, but an IV is not considered as
     /// something secret so it is not a problem from security perspective.
     /// </remarks>
-    public class EncryptorManager: FileManager
+    public class EncryptorManager : FileManager
     {
         private const int AesBlockByteSize = 128 / 8;
 
