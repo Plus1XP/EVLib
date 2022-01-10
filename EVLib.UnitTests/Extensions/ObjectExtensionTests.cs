@@ -1,11 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EVLlib.Extentensions;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVLlib.Extentensions.Tests
+namespace EVLib.Extensions.Tests
 {
     public class TestObject
     {
@@ -14,8 +9,8 @@ namespace EVLlib.Extentensions.Tests
 
         public TestObject(string testRef, int testVal)
         {
-            TestRef = testRef;
-            TestVal = testVal;
+            this.TestRef = testRef;
+            this.TestVal = testVal;
         }
 
         public TestObject()

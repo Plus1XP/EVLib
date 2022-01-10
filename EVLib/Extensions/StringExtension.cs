@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace EVLlib.Extentensions
+namespace EVLib.Extensions
 {
     public static class StringExtension
     {
@@ -40,7 +39,7 @@ namespace EVLlib.Extentensions
         }
 
         /// <summary>
-        /// Get string value after [first] a.
+        /// Get string value before [first] a.
         /// </summary>
         /// <remarks>
         /// The Before method accepts 1 string (a) 
@@ -91,7 +90,7 @@ namespace EVLlib.Extentensions
         /// </summary>
         /// <remarks>
         /// The RemoveWords method accepts 1 array (excludedWords) and
-        /// iterates through it remove each match in the source string.
+        /// iterates through it removing each match in the source string.
         /// </remarks>
         /// <param name="excludedWords">Array of strings.</param>
         /// <returns>
@@ -107,7 +106,7 @@ namespace EVLlib.Extentensions
         }
 
         /// <summary>
-        /// Get string value after removing swapping letters.
+        /// Get string value after swapping letters.
         /// </summary>
         /// <remarks>
         /// The ReplaceLetters method accepts 2 Chars (lettersToFind)

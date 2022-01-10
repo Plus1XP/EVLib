@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace EVLib.ConsoleTools
 {
-    class TextUI
+    public class TextUI
     {
         /// <summary>
         /// Reads a string (letters) from the console using Console.ReadLine.
@@ -74,7 +72,7 @@ namespace EVLib.ConsoleTools
         }
 
         /// <summary>
-        /// Executes Console.ReadLine Method.
+        /// Captures line by using the Console.ReadLine Method.
         /// </summary>
         /// <returns>String of characters from input stream.</returns>
         public string GetResponse()
@@ -83,7 +81,7 @@ namespace EVLib.ConsoleTools
         }
 
         /// <summary>
-        /// Executes the Console.ReadKey Method.
+        /// Waits for user input by using the Console.ReadKey Method.
         /// </summary>
         public void AwaitResponse()
         {
@@ -110,10 +108,10 @@ namespace EVLib.ConsoleTools
         /// <summary>
         /// Sets the console title bar text.
         /// </summary>
-        /// <param name="text">Text to be displayed in the console title bar.</param>
-        public void SetConsoleTitle(string text)
+        /// <param name="title">Text to be displayed in the console title bar.</param>
+        public void SetConsoleTitle(string title)
         {
-            Console.Title = text;
+            Console.Title = title;
         }
 
         /// <summary>
@@ -126,17 +124,16 @@ namespace EVLib.ConsoleTools
         }
 
         /// <summary>
-        /// Align content to center for console. Can be used with decoration if used inside menu or header
+        /// Prints a string Aligned to the center of the console. Can be used with decoration if used inside menu or header.
         /// </summary>
         /// <param name="text">Content to center</param>
-        /// <returns>Center aligned text</returns>
         public void PrintToCenterScreen(string text)
         {
             Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + (text.Length / 2)) + "}", text));
         }
 
         /// <summary>
-        /// Gets the newline string.
+        /// Prints a blank line using the newline string.
         /// </summary>
         /// <remarks>
         /// Uses Environment.NewLine (\r\n).

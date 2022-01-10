@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace EVLib.FileIO
@@ -25,7 +24,7 @@ namespace EVLib.FileIO
         }
 
         /// <summary>
-        /// converts a String to a Local DateTime equivalent.
+        /// Converts a String to a Local DateTime equivalent.
         /// </summary>
         /// <param name="dateTime">String representation of a date and time.</param>
         /// <returns>Local DateTime.</returns>
@@ -161,7 +160,8 @@ namespace EVLib.FileIO
         }
 
         /// <TODO>
-        /// Validate if file was save sucessfully or not.
+        /// Validate if file was save sucessfully or not,
+        /// using a bool.
         /// </TODO>
         /// 
         /// <summary>
@@ -177,7 +177,8 @@ namespace EVLib.FileIO
         }
 
         /// <TODO>
-        /// Validate if file was read sucessfully or not.
+        /// Validate if file was save sucessfully or not,
+        /// using a bool.
         /// </TODO>
         /// 
         /// <summary>
@@ -191,7 +192,8 @@ namespace EVLib.FileIO
         }
 
         /// <TODO>
-        /// Validate if file was deleted sucessfully or not.
+        /// Validate if file was save sucessfully or not,
+        /// using a bool.
         /// </TODO>
         /// 
         /// <summary>

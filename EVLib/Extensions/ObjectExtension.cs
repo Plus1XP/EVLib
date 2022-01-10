@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVLlib.Extentensions
+﻿namespace EVLib.Extensions
 {
     public static class ObjectExtension
     {
         /// <summary>
         /// Copies all fields and properties from one Object to another.
         /// </summary>
-        /// <param name="destinationObjct">The destination Object.</param>
+        /// <param name="destinationObject">The destination Object.</param>
         /// <param name="sourceObject">The source Object.</param>
-        public static void ShallowCopy(this object destinationObjct, object sourceObject)
+        public static void ShallowCopy(this object destinationObject, object sourceObject)
         {
             var sourceType = sourceObject.GetType();
-            var destinationType = destinationObjct.GetType();
+            var destinationType = destinationObject.GetType();
             foreach (var field in sourceType.GetFields())
             {
                 var destinationField = destinationType.GetField(field.Name);
@@ -22,7 +18,7 @@ namespace EVLlib.Extentensions
                 {
                     continue;
                 }
-                destinationField.SetValue(destinationObjct, field.GetValue(sourceObject));
+                destinationField.SetValue(destinationObject, field.GetValue(sourceObject));
             }
 
             foreach (var property in sourceType.GetProperties())
@@ -32,7 +28,7 @@ namespace EVLlib.Extentensions
                 {
                     continue;
                 }
-                destinationProperty.SetValue(destinationObjct, property.GetValue(sourceObject, null), null);
+                destinationProperty.SetValue(destinationObject, property.GetValue(sourceObject, null), null);
             }
         }
     }

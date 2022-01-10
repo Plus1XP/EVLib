@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 
 namespace EVLib.FileIO
 {
-    class XMLManager : FileManager
+    public class XMLManager : FileManager
     {
         public XMLManager()
         {
@@ -15,15 +13,15 @@ namespace EVLib.FileIO
         /// <summary>
         /// Gets boolean value from attribute in XML node.
         /// </summary>
-        /// <param name="xmlFileLoaction">Path to XML file.</param>
+        /// <param name="xmlFileLocation">Path to XML file.</param>
         /// <param name="nodePath">XML node path.</param>
         /// <param name="nodeName">XML node name.</param>
         /// <param name="nodeValue">XML node value.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <returns>XML attribute value as boolean.</returns>
-        public bool GetNodeAttributeValueAsBool(string xmlFileLoaction, string nodePath, string nodeName, string nodeValue, string attributeName)
+        public bool GetNodeAttributeValueAsBool(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName)
         {
-            XmlNodeList nodeList = this.LoadNodeList(this.LoadXmlDocument(xmlFileLoaction), nodePath);
+            XmlNodeList nodeList = this.LoadNodeList(this.LoadXmlDocument(xmlFileLocation), nodePath);
             XmlAttribute elementAttribute = this.GetAttributeFromNodeList(nodeList, nodeName, nodeValue, attributeName);
 
             return this.GetAttributeValueAsBool(elementAttribute);
@@ -32,15 +30,15 @@ namespace EVLib.FileIO
         /// <summary>
         /// Gets Integer value from attribute in XML node.
         /// </summary>
-        /// <param name="xmlFileLoaction">Path to XML file.</param>
+        /// <param name="xmlFileLocation">Path to XML file.</param>
         /// <param name="nodePath">XML node path.</param>
         /// <param name="nodeName">XML node name.</param>
         /// <param name="nodeValue">XML node value.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <returns>XML attribute value as integer.</returns>
-        public int GetNodeAttributeValueAsInt(string xmlFileLoaction, string nodePath, string nodeName, string nodeValue, string attributeName)
+        public int GetNodeAttributeValueAsInt(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName)
         {
-            XmlNodeList nodeList = this.LoadNodeList(this.LoadXmlDocument(xmlFileLoaction), nodePath);
+            XmlNodeList nodeList = this.LoadNodeList(this.LoadXmlDocument(xmlFileLocation), nodePath);
             XmlAttribute elementAttribute = this.GetAttributeFromNodeList(nodeList, nodeName, nodeValue, attributeName);
 
             return this.GetAttributeValueAsInt(elementAttribute);
@@ -85,12 +83,12 @@ namespace EVLib.FileIO
         /// <summary>
         /// Loads XML document from file.
         /// </summary>
-        /// <param name="xmlFileLoaction">Path to XML file.</param>
+        /// <param name="xmlFileLocation">Path to XML file.</param>
         /// <returns>XML Document.</returns>
-        public XmlDocument LoadXmlDocument(string xmlFileLoaction)
+        public XmlDocument LoadXmlDocument(string xmlFileLocation)
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(this.ReadStringFromFile(xmlFileLoaction));
+            xmlDoc.LoadXml(this.ReadStringFromFile(xmlFileLocation));
 
             return xmlDoc;
         }
@@ -99,7 +97,7 @@ namespace EVLib.FileIO
         /// Loads XML node list from XML document.
         /// </summary>
         /// <param name="xmlDoc">XML Document to load.</param>
-        /// <param name="nodePath">Path to XML file.</param>
+        /// <param name="nodePath">XML node path.</param>
         /// <returns>XML node list.</returns>
         public XmlNodeList LoadNodeList(XmlDocument xmlDoc, string nodePath)
         {
@@ -113,10 +111,10 @@ namespace EVLib.FileIO
         /// Saves XML document to file.
         /// </summary>
         /// <param name="xmlDoc">XML document to save.</param>
-        /// <param name="xmlFileLoaction">Path to XML file.</param>
-        public void SaveXmlDocument(XmlDocument xmlDoc, string xmlFileLoaction)
+        /// <param name="xmlFileLocation">Path to XML file.</param>
+        public void SaveXmlDocument(XmlDocument xmlDoc, string xmlFileLocation)
         {
-            xmlDoc.Save(xmlFileLoaction);
+            xmlDoc.Save(xmlFileLocation);
         }
 
         /// <summary>
@@ -178,27 +176,27 @@ namespace EVLib.FileIO
         /// Gets attribute integer value from XML attribute.
         /// </summary>
         /// <param name="attribute">XML attribute.</param>
-        /// <returns>XML attribute value as integer.</returns>
+        /// <returns>XML attribute value as integer (0 if attribute is null).</returns>
         public int GetAttributeValueAsInt(XmlAttribute attribute)
         {
             if (attribute == null)
             {
-                return 15;
+                return 0;
             }
 
             return Convert.ToInt32(attribute.Value);
         }
 
         /// <summary>
-        /// Gets attribute boolean vlaue from XML attribute.
+        /// Gets attribute boolean value from XML attribute.
         /// </summary>
         /// <param name="attribute">XML attribute.</param>
-        /// <returns>XML attribute value as boolean.</returns>
+        /// <returns>XML attribute value as boolean (false if attribute is null).</returns>
         public bool GetAttributeValueAsBool(XmlAttribute attribute)
         {
             if (attribute == null)
             {
-                return true;
+                return false;
             }
 
             return Convert.ToBoolean(attribute.Value);
@@ -232,7 +230,7 @@ namespace EVLib.FileIO
         /// <param name="node">XML node.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <returns>XML attribute value as boolean.</returns>
-        public bool GetNodeAttributeValueAsBool(XmlNode node, string attributeName)
+        private bool GetNodeAttributeValueAsBool(XmlNode node, string attributeName)
         {
             return Convert.ToBoolean(this.GetNodeAttribute(node, attributeName).Value);
         }
@@ -243,7 +241,7 @@ namespace EVLib.FileIO
         /// <param name="node">XML node.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <returns>XML attribute.</returns>
-        public XmlAttribute GetNodeAttribute(XmlNode node, string attributeName)
+        private XmlAttribute GetNodeAttribute(XmlNode node, string attributeName)
         {
             return node.Attributes?[attributeName];
         }
@@ -276,7 +274,7 @@ namespace EVLib.FileIO
         /// <param name="node">XML node.</param>
         /// <param name="attributeName">XML attribute name.</param>
         /// <param name="attributeValue">boolean value to set XML attribute node.</param>
-        public void SetNodeAttributeFromBool(XmlNode node, string attributeName, bool attributeValue)
+        private void SetNodeAttributeFromBool(XmlNode node, string attributeName, bool attributeValue)
         {
             this.SetNodeAttribute(node, attributeName, Convert.ToString(attributeValue));
         }

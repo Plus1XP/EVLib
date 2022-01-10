@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVLib.Mail
+﻿namespace EVLib.Mail
 {
     public class ServerSettings
     {
@@ -31,26 +27,30 @@ namespace EVLib.Mail
         /// <param name="enableSsl">Specifies whether the email server requires SSL.</param>
         public ServerSettings(string host, int port, string username, string password, bool enableSsl)
         {
-            Host = host;
-            Port = port;
-            UseDefaultCredentials = false;
-            Username = username;
-            Password = password;
-            EnableSsl = enableSsl;
+            this.Host = host;
+            this.Port = port;
+            this.UseDefaultCredentials = false;
+            this.Username = username;
+            this.Password = password;
+            this.EnableSsl = enableSsl;
         }
 
         /// <summary>
         /// Provides the properties required to send an email.
         /// </summary>
+        /// <remarks>
+        /// This overload sets "UseDefaultCredentials" to true.
+        /// This will use the credentials of the current logged in user.
+        /// </remarks>
         /// <param name="host">Email servers host address.</param>
         /// <param name="port">Email servers port.</param>
         /// <param name="enableSsl">Specifies whether the email server requires SSL.</param>
         public ServerSettings(string host, int port, bool enableSsl)
         {
-            Host = host;
-            Port = port;
-            UseDefaultCredentials = true;
-            EnableSsl = enableSsl;
+            this.Host = host;
+            this.Port = port;
+            this.UseDefaultCredentials = true;
+            this.EnableSsl = enableSsl;
         }
     }
 }

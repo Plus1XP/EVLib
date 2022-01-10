@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 
 namespace EVLib.Mail
 {
@@ -17,31 +15,35 @@ namespace EVLib.Mail
         }
 
         /// <summary>
-        ///  Initializes client for sending emails via STMP.
+        /// Initializes client for sending emails via STMP.
         /// </summary>
         /// <param name="serverSettings">Initializes a new instance of the Server Settings class with the specified settings.</param>
         public Client(ServerSettings serverSettings)
         {
-            Server = serverSettings;
+            this.Server = serverSettings;
         }
 
         /// <summary>
-        ///  Initializes client for sending emails via STMP.
+        /// Initializes client for sending emails via STMP.
         /// </summary>
+        /// <remarks>
+        /// This overload sets "UseDefaultCredentials" to true.
+        /// This will use the credentials of the current logged in user.
+        /// </remarks>
         /// <param name="host">Email servers host address.</param>
         /// <param name="port">Email servers port.</param>
         /// <param name="enableSsl">Specifies whether the email server requires SSL.</param>
         public Client(string host, int port, bool enableSsl)
         {
-            Server = new ServerSettings();
-            Server.Host = host;
-            Server.Port = port;
-            Server.UseDefaultCredentials = true;
-            Server.EnableSsl = enableSsl;
+            this.Server = new ServerSettings();
+            this.Server.Host = host;
+            this.Server.Port = port;
+            this.Server.UseDefaultCredentials = true;
+            this.Server.EnableSsl = enableSsl;
         }
 
         /// <summary>
-        ///  Initializes client for sending emails via STMP.
+        /// Initializes client for sending emails via STMP.
         /// </summary>
         /// <param name="host">Email servers host address.</param>
         /// <param name="port">Email servers port.</param>
@@ -50,33 +52,39 @@ namespace EVLib.Mail
         /// <param name="enableSsl">Specifies whether the email server requires SSL.</param>
         public Client(string host, int port, string username, string password, bool enableSsl)
         {
-            Server = new ServerSettings();
-            Server.Host = host;
-            Server.Port = port;
-            Server.UseDefaultCredentials = false;
-            Server.Username = username;
-            Server.Password = password;
-            Server.EnableSsl = enableSsl;
+            this.Server = new ServerSettings();
+            this.Server.Host = host;
+            this.Server.Port = port;
+            this.Server.UseDefaultCredentials = false;
+            this.Server.Username = username;
+            this.Server.Password = password;
+            this.Server.EnableSsl = enableSsl;
         }
 
         /// <summary>
         /// Sends an email via SMTP
         /// </summary>
+        /// <remarks>
+        /// ServerSettings and MessageField must be set to the public fields.
+        /// </remarks>
         /// <returns>Sent confirmation as String.</returns>
-        public String Send()
+        public string Send()
         {
-            return SendSMTP();
+            return this.SendSMTP();
         }
 
         /// <summary>
         /// Sends an email via SMTP
         /// </summary>
+        /// <remarks>
+        /// ServerSettings must be passed into the constructor.
+        /// </remarks>
         /// <param name="messageField">Initializes a new instance of the MessageField class with the specified fields.</param>
         /// <returns>Sent confirmation as String.</returns>
         public string Send(MessageField messageField)
         {
-            Field = messageField;
-            return SendSMTP();
+            this.Field = messageField;
+            return this.SendSMTP();
         }
 
         /// <summary>
@@ -93,15 +101,15 @@ namespace EVLib.Mail
         public string Send(string senderName, string senderEmail, string recipientName,
             string recipientEmail, string subject, string body, string attachmentPath = null)
         {
-            Field = new MessageField();
-            Field.SenderName = senderName;
-            Field.SenderEmail = senderEmail;
-            Field.RecipientName = recipientName;
-            Field.RecipientEmail = recipientEmail;
-            Field.Subject = subject;
-            Field.Body = body;
-            Field.AttachmentPath = attachmentPath;
-            return SendSMTP();
+            this.Field = new MessageField();
+            this.Field.SenderName = senderName;
+            this.Field.SenderEmail = senderEmail;
+            this.Field.RecipientName = recipientName;
+            this.Field.RecipientEmail = recipientEmail;
+            this.Field.Subject = subject;
+            this.Field.Body = body;
+            this.Field.AttachmentPath = attachmentPath;
+            return this.SendSMTP();
         }
 
         /// <summary>
@@ -121,40 +129,40 @@ namespace EVLib.Mail
             {
                 SmtpClient mailServer = new SmtpClient();
 
-                mailServer.Host = Server.Host;
-                mailServer.Port = Server.Port;
+                mailServer.Host = this.Server.Host;
+                mailServer.Port = this.Server.Port;
                 // must be set before NetworkCredentials
-                mailServer.UseDefaultCredentials = Server.UseDefaultCredentials;
+                mailServer.UseDefaultCredentials = this.Server.UseDefaultCredentials;
 
-                if (Server.UseDefaultCredentials == false)
+                if (this.Server.UseDefaultCredentials == false)
                 {
-                    mailServer.Credentials = new NetworkCredential(Server.Username, Server.Password);
+                    mailServer.Credentials = new NetworkCredential(this.Server.Username, this.Server.Password);
                 }
 
-                mailServer.EnableSsl = Server.EnableSsl;
+                mailServer.EnableSsl = this.Server.EnableSsl;
 
                 // add from,to mailaddresses
-                MailAddress from = new MailAddress(Field.SenderEmail, Field.SenderName);
-                MailAddress to = new MailAddress(Field.RecipientEmail, Field.RecipientName);
+                MailAddress from = new MailAddress(this.Field.SenderEmail, this.Field.SenderName);
+                MailAddress to = new MailAddress(this.Field.RecipientEmail, this.Field.RecipientName);
                 MailMessage email = new MailMessage(from, to);
 
                 // TODO Add option to use different reply to address.
                 // add ReplyTo
-                MailAddress replyto = new MailAddress(Field.SenderEmail);
+                MailAddress replyto = new MailAddress(this.Field.SenderEmail);
                 email.ReplyToList.Add(replyto);
 
                 // set subject and encoding
-                email.Subject = Field.Subject;
+                email.Subject = this.Field.Subject;
                 email.SubjectEncoding = System.Text.Encoding.UTF8;
 
                 // add Attachment
-                if (Field.AttachmentPath != null)
+                if (this.Field.AttachmentPath != null)
                 {
-                    email.Attachments.Add(new Attachment(Field.AttachmentPath));
+                    email.Attachments.Add(new Attachment(this.Field.AttachmentPath));
                 }
 
                 // set body-message and encoding
-                email.Body = Field.Body;
+                email.Body = this.Field.Body;
                 email.BodyEncoding = System.Text.Encoding.UTF8;
 
                 // text or html

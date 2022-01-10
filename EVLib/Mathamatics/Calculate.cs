@@ -52,6 +52,9 @@ namespace EVLib.Mathamatics
             return average;
         }
 
+        /// <TODO>
+        /// NOT WORKING CORRECTLY!
+        /// </TODO>
         /// <summary>
         /// Create truely random numbers using an instance of an encryption class (RNGCryptoServiceProvider).
         /// </summary>
@@ -82,6 +85,6 @@ namespace EVLib.Mathamatics
             double randomValueInRange = Math.Floor(multiplier * range);
 
             return (int)(minimumValue + randomValueInRange);
-        }        
+        }
     }
 }

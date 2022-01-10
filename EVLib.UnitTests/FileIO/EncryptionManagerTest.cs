@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace EVLib.FileIO.Tests
 {
@@ -22,8 +19,8 @@ namespace EVLib.FileIO.Tests
 
         private void CleanupDirectories()
         {
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            File.Delete(this.testFile);
+            Directory.Delete(this.testDirectory);
         }
 
         [TestMethod]
@@ -31,16 +28,16 @@ namespace EVLib.FileIO.Tests
         {
             EncryptionManager encryptionManager = new EncryptionManager();
 
-            string expected = sampleText;
+            string expected = this.sampleText;
 
-            Directory.CreateDirectory(testDirectory);
+            Directory.CreateDirectory(this.testDirectory);
 
-            encryptionManager.EncryptStringToFile(testFile, sampleText, encryptionKey);
-            string actual = encryptionManager.DecryptStringFromFile(testFile, encryptionKey);
+            encryptionManager.EncryptStringToFile(this.testFile, this.sampleText, this.encryptionKey);
+            string actual = encryptionManager.DecryptStringFromFile(this.testFile, this.encryptionKey);
 
             Assert.AreEqual(expected, actual);
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
     }
 }

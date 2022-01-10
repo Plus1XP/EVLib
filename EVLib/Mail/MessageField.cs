@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EVLib.Mail
+﻿namespace EVLib.Mail
 {
     public class MessageField
     {
@@ -35,13 +31,13 @@ namespace EVLib.Mail
         public MessageField(string senderName, string senderEmail, string recipientName,
             string recipientEmail, string subject, string body, string attachmentPath = null)
         {
-            SenderName = senderName;
-            SenderEmail = senderEmail;
-            RecipientName = recipientName;
-            RecipientEmail = recipientEmail;
-            Subject = subject;
-            Body = body;
-            AttachmentPath = attachmentPath;
+            this.SenderName = senderName;
+            this.SenderEmail = senderEmail;
+            this.RecipientName = recipientName;
+            this.RecipientEmail = recipientEmail;
+            this.Subject = subject;
+            this.Body = body;
+            this.AttachmentPath = attachmentPath;
         }
     }
 }

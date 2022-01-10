@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace EVLib.FileIO.Tests
 {
@@ -22,8 +19,8 @@ namespace EVLib.FileIO.Tests
 
         private void CleanupDirectories()
         {
-            File.Delete(testFile);
-            Directory.Delete(testDirectory);
+            File.Delete(this.testFile);
+            Directory.Delete(this.testDirectory);
         }
 
         [TestMethod]
@@ -31,16 +28,16 @@ namespace EVLib.FileIO.Tests
         {
             EncryptorManager encryptor = new EncryptorManager();
 
-            string expected = sampleText;
+            string expected = this.sampleText;
 
-            Directory.CreateDirectory(testDirectory);
+            Directory.CreateDirectory(this.testDirectory);
 
-            encryptor.EncryptToFile(testFile, sampleText, encryptionKey);
-            string actual = encryptor.DecryptFromFile(testFile, encryptionKey);
+            encryptor.EncryptToFile(this.testFile, this.sampleText, this.encryptionKey);
+            string actual = encryptor.DecryptFromFile(this.testFile, this.encryptionKey);
 
             Assert.AreEqual(expected, actual);
 
-            CleanupDirectories();
+            this.CleanupDirectories();
         }
 
         [TestMethod]
@@ -48,10 +45,10 @@ namespace EVLib.FileIO.Tests
         {
             EncryptorManager encryptor = new EncryptorManager();
 
-            string expected = sampleText;
+            string expected = this.sampleText;
 
-            string encryptedString = encryptor.EncryptToString(sampleText, encryptionKey);
-            string actual = encryptor.DecryptFromString(encryptedString, encryptionKey);
+            string encryptedString = encryptor.EncryptToString(this.sampleText, this.encryptionKey);
+            string actual = encryptor.DecryptFromString(encryptedString, this.encryptionKey);
 
             Assert.AreEqual(expected, actual);
         }
@@ -61,10 +58,10 @@ namespace EVLib.FileIO.Tests
         {
             EncryptorManager encryptor = new EncryptorManager();
 
-            string expected = sampleText;
+            string expected = this.sampleText;
 
-            byte[] encryptedBytes = encryptor.EncryptToByteArray(sampleText, encryptionKey);
-            string actual = encryptor.DecryptFromByteArray(encryptedBytes, encryptionKey);
+            byte[] encryptedBytes = encryptor.EncryptToByteArray(this.sampleText, this.encryptionKey);
+            string actual = encryptor.DecryptFromByteArray(encryptedBytes, this.encryptionKey);
 
             Assert.AreEqual(expected, actual);
         }
