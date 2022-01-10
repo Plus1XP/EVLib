@@ -9,6 +9,7 @@
     <Copyright>Plus1XP</Copyright>
     <Owners>Plus1XP</Owners>
     <PackageProjectUrl>https://github.com/Plus1XP</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Plus1XP/EVLib</RepositoryUrl>
     <Version>1.0.0</Version>
   </PropertyGroup>
 
